@@ -6,28 +6,35 @@
 </head>
 <body>
 <script type="text/javascript">
-    var lit = {
-
-        variable1       : 40,
-        stringVariable2 : 30
-
-    };
-
-    function f(param){
-        var b;
-        for (var a in param) {
-            if(typeof param[a] == 'number')  {
-               // b = b + param[a] + param[a];
-                    b += param[a];
-            }
-
+   var car = {
+       brendCar: 'lanos',
+       speed: 150,
+       weight: '\n3\ntons',
+       seats: 5,
+       //starting: true,
+       end: true,
+       men: [1,2,3,4,5],
+       stop: function(){
+           if(this.end == true){
+               console.log('остановился');
+           }
+       },
+       go: function(){
+        if(this.end == false){
+            console.log('начал движение');
         }
+       }
 
-        return b;
-    }
+   }
+    car.go();
+   car.stop();
 
-    console.log(f(lit));
 </script>
 
 </body>
 </html>
+wakeUp      : function () {
+if (this.isSleeping == true) {
+this.isSleeping = false;
+console.log('Проснулся');
+}
