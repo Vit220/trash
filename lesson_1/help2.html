@@ -6,14 +6,6 @@
 </head>
 <body>
 <script type="text/javascript">
-
-
-    //var message = prompt('Сколько людей в Автомобиле ');
-   // message = +message;
-
-    //var passanger = prompt('Сколько людей в Автомобиле ');
-    //passanger = +passanger;
-
     var car = {
 
 
@@ -45,7 +37,7 @@
                     console.log('Минимум 1 водитель, максимум 5 человек');
             }
 
-            if (typeof passengers != 'string') {
+            if (passengers.length <= this.seats && passengers.length >= 1 &&   typeof passengers != 'string') {
                 console.log(passengers.length);
             }
             var confirmed = confirm('Вы хотите начать движение?');
@@ -59,69 +51,6 @@
 
         }}
     car.addToCar();
-
-
-
-
-
-
-
-
-
-
-    //car.men();
-
-
-
-
-
-
-
-    /*var car = {
-
-     model: 'lanos',
-     speed: 150,
-     seats: 5,
-     men: function(){
-     var message = prompt('Сколько людей в Автомобиле ');
-     var x;
-     switch (message){
-     case '1':
-     x = 1;
-     break;
-     case '2':
-     x = 2;
-     break;
-     case '3':
-     x = 3;
-     break;
-     case '4':
-     x = 4;
-     break;
-     case '5':
-     x = 5;
-     break;
-     case '0':
-     x = 'в авто пусто';
-     break;
-     default:
-     x = 'не больше 5';
-     break;
-     }
-     console.log('Занято мест - ' + x)
-     // return x;
-     var confirmed = confirm('Вы хотите начать движение?');
-     if (confirmed && x != 'не больше 5'&& x != 'в авто пусто' ) {
-
-     console.log('Автомобиль начал движение');
-
-     }   else {
-     console.log('Автомобиль стоит');
-     }
-
-     }
-     }
-     car.men();*/
 </script>
 
 </body>
