@@ -27,7 +27,12 @@
         },
         passanger: function(){
 
-            if (this.passangerS > 0 && this.passangerS < 6) {console.log(this.passangerS()) }
+            if (this.passangerS > 0 && this.passangerS < 6) {
+
+                for (var i = 0; i <= this.passangerS.length; i++){
+                    console.log(this.passangerS[i]);
+                }
+                 }
 
              else {this.carGo = false;
                 console.log('Минимум 1 водитель, максимум 5 человек');}
@@ -46,7 +51,7 @@
             }
         }
     }
-    car.addToCar (2);
+    car.addToCar (4);
     car.stop();
     car.go();
     car.passanger();
