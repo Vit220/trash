@@ -33,6 +33,9 @@
                 case '5':
                     x = 5;
                     break;
+                case '0':
+                    x = 'в авто пусто';
+                    break;
                 default:
                     x = 'не больше 5';
                     break;
@@ -40,7 +43,7 @@
             console.log('Занято мест - ' + x)
            // return x;
             var confirmed = confirm('Вы хотите начать движение?');
-            if (confirmed && x != 'не больше 5' ) {
+            if (confirmed && x != 'не больше 5'&& x != 'в авто пусто' ) {
 
                 console.log('Автомобиль начал движение');
 
