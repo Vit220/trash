@@ -17,6 +17,19 @@
         seats: 5,
         carStop: true,
         carGo: false,
+        stop: function(){
+            if(this.carStop == true){
+                this.carGo = false;
+                console.log('Стоим');
+            }
+        },
+        go: function(){
+
+            if(this.carStop == false){
+                this.carGo = true;
+                console.log('Чух-чух');
+            }
+        },
         passangerS: [],
         addToCar: function (passanger)
             {
@@ -37,23 +50,12 @@
              else {this.carGo = false;
                 console.log('Минимум 1 водитель, максимум 5 человек');}
 
-        },
-        stop: function(){
-            if(this.carStop == true){
-                this.carGo = false;
-                console.log('Стоим');
-            }
-        },
-        go: function(){
-            if(this.carGo == true){
-                this.carStop = false;
-                console.log('Чух-чух');
-            }
         }
     }
-    car.addToCar (4);
+    car.carStop = true;
     car.stop();
     car.go();
+    car.addToCar (3);
     car.passanger();
 
 </script>
