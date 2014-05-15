@@ -34,24 +34,35 @@
                     x = 5;
                     break;
                 default:
-                    x = 'Количество мест 5';
+                    x = 'не больше 5';
                     break;
             }
-            console.log('В машине' + x, 'человек')
-            return x;
-
-
-        },
-        //people: console.log('В машине'+ this.men, 'пасажиров'),
-        starting: function(){
+            console.log('Занято мест' + x)
+           // return x;
             var confirmed = confirm('Вы хотите начать движение?');
-            if (confirmed) {
+            if (confirmed && x != 'не больше 5' ) {
+
                 console.log('Автомобиль начал движение');
-            } else {
+
+            }   else {
                 console.log('Автомобиль стоит');
             }
-            return confirmed;
-        }
+
+        }//,
+        //people: console.log('В машине'+ this.men, 'пасажиров'),
+       // starting: function(){
+       //     var confirmed = confirm('Вы хотите начать движение?');
+
+        //        if (confirmed ) {
+
+       //         console.log('Автомобиль начал движение');
+
+        //         }   else {
+        //            console.log('Автомобиль стоит');
+        //             }
+
+        //    return confirmed;
+       // }
 
 
 
@@ -59,7 +70,7 @@
 
     }
     car.men();
-    car.starting();
+   // car.starting();
 
 
 
