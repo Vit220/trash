@@ -20,14 +20,14 @@
         passangerS: [],
         addToCar: function (passanger)
             {
-            this.passengerS.push(passanger);
+            this.passangerS.push(passanger);
             },
         mToCar: function (passanger){
-            this.passengerS.pop(passanger);
+            this.passangerS.pop(passanger);
         },
         passanger: function(){
 
-            if (passanger > 0 && passanger < 6) {console.log(this.passangerS()) }
+            if (passangerS > 0 && passangerS < 6) {console.log(this.passangerS()) }
 
              else {this.carGo = false;
                 console.log('Минимум 1 водитель, максимум 5 человек');}
@@ -46,7 +46,7 @@
             }
         }
     }
-    car.addToCar(2);
+    car.addToCar (2);
     car.stop();
     car.go();
     car.passanger();
