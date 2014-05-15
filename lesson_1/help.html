@@ -6,21 +6,60 @@
 </head>
 <body>
 <script type="text/javascript">
+    var message = prompt('Сколько людей в Автомобиле ');
+    var confirmed = confirm('Вы хотите начать движение?');
    var car = {
+
        model: 'lanos',
        speed: 150,
        seats: 5,
-       //starting: true,
+       men: function(){
+          // var message = prompt('Сколько людей в Автомобиле ');
+           var x;
+           switch (message){
+               case 1:
+                   x = 1;
+                   break;
+               case 2:
+                   x = 2;
+                   break;
+               case 3:
+                   x = 3;
+                   break;
+               case 4:
+                   x = 4;
+                   break;
+               case 5:
+                   x = 5;
+                   break;
+               default:
+                   x = 'Количество мест 5';
+                   break;
+           }
+           return x;
+           //console.log('В машине'+ x, 'пасажиров')
+
+       },
+           people: console.log('В машине'+ this.men, 'пасажиров'),
+       starting: function(){
+           //var confirmed = confirm('Вы хотите начать движение?');
+           if (confirmed) {
+               end = false;
+           } else {
+               end = true;
+           }
+           return end;
+       },
        end: true,
-       men: [1,2,3,4,5],
+
        stop: function(){
            if(this.end == true){
-               console.log('остановился');
+               console.log('Автомобиль стоит');
            }
        },
        go: function(){
         if(this.end == false){
-            console.log('начал движение');
+            console.log('Автомобиль начал движение');
         }
        }
 
