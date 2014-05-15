@@ -6,51 +6,44 @@
 </head>
 <body>
 <script type="text/javascript">
+
+    var pas = prompt('Сколько людей в Автомобиле ');
+    pas = +pas;
+    car.passangerS = pas;
+    car.stop();
+    car.go();
+    car.passanger();
+
+
     var car = {
-
-
         model: 'lanos',
         speed: 150,
         seats: 5,
+        carStop: true,
+        carGo: false,
+        passangerS: 0,
+        passanger: function(){
 
-        addToCar: function () {
-            var passanger = prompt('Сколько людей в Автомобиле ');
-            passanger = +passanger;
-            var passengers = [];
-            switch (passanger) {
-                case 1:
-                    passengers.push(1);
-                    break;
-                case 2:
-                    passengers.push(1, 2);
-                    break;
-                case 3:
-                    passengers.push(1, 2, 3);
-                    break;
-                case 4:
-                    passengers.push(1, 2, 3, 4);
-                    break;
-                case 5:
-                    passengers.push(1, 2, 3, 4, 5);
-                    break;
-                default:
-                    console.log('Минимум 1 водитель, максимум 5 человек');
+            if (passanger > 0 && passanger < 6) {console.log(this.passangerS()) }
+
+             else {this.carGo = false;
+                console.log('Минимум 1 водитель, максимум 5 человек');}
+
+        },
+        stop: function(){
+            if(this.carStop == true){
+                this.carGo = false;
+                console.log('Стоим');
             }
-
-            if (passengers.length <= this.seats && passengers.length >= 1 &&   typeof passengers != 'string') {
-                console.log(passengers.length);
+        },
+        go: function(){
+            if(this.carGo == true){
+                this.carStop = false;
+                console.log('Чух-чух');
             }
-            var confirmed = confirm('Вы хотите начать движение?');
-            if (confirmed && passengers.length <=5 && passengers.length >=1) {
+        }
+    }
 
-                console.log('Автомобиль начал движение');
-
-            } else {
-                console.log('Автомобиль стоит');
-            }
-
-        }}
-    car.addToCar();
 </script>
 
 </body>
