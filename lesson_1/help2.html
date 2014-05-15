@@ -7,8 +7,7 @@
 <body>
 <script type="text/javascript">
 
-    var pas = prompt('Сколько людей в Автомобиле ');
-    pas = +pas;
+
 
 
 
@@ -18,7 +17,14 @@
         seats: 5,
         carStop: true,
         carGo: false,
-        passangerS: 0,
+        passangerS: [],
+        addToCar: function (passanger)
+            {
+            this.passengerS.push(passanger);
+            },
+        mToCar: function (passanger){
+            this.passengerS.pop(passanger);
+        },
         passanger: function(){
 
             if (passanger > 0 && passanger < 6) {console.log(this.passangerS()) }
@@ -40,7 +46,7 @@
             }
         }
     }
-    car.passangerS = pas;
+    car.addToCar(2);
     car.stop();
     car.go();
     car.passanger();
