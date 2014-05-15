@@ -38,37 +38,28 @@
                     break;
             }
             return x;
-            //console.log('В машине'+ x, 'пасажиров')
+            console.log('В машине'+ x, 'пасажиров')
 
         },
-        people: console.log('В машине'+ this.men, 'пасажиров'),
+        //people: console.log('В машине'+ this.men, 'пасажиров'),
         starting: function(){
             var confirmed = confirm('Вы хотите начать движение?');
             if (confirmed) {
-                end = false;
+                console.log('Автомобиль начал движение');
             } else {
-                end = true;
-            }
-            return end;
-        },
-        end: true,
-
-        stop: function(){
-            if(this.end == true){
                 console.log('Автомобиль стоит');
             }
-        },
-        go: function(){
-            if(this.end == false){
-                console.log('Автомобиль начал движение');
-            }
+            return confirmed;
         }
+
+
+
+
 
     }
     car.men();
     car.starting();
-    car.go();
-    car.stop();
+
 
 
 </script>
