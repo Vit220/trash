@@ -67,6 +67,12 @@
       
         InBasket: function () {
 
+            for (var i =0; i < this.ListOfItems.lengthl i++ ) {
+                console.log('Item name: ' + this.ListOfItems[i].name + ' Price: ' + this.ListOfItems[i].price);
+                
+            }
+
+
             if (basket.ListOfItems.length > 0) {
                 document.write('Сейчас в корзине ' + basket.ListOfItems + ' Количество - ' + basket.ListOfItems.length);
             } else {
