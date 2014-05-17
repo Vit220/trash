@@ -56,11 +56,47 @@
 
             if (confirmed) {
                 var message = prompt('Ввести товар');
-                return basket.add(message);
+
+                basket.add(message);
+
+                var b = function () {
+                    var confirmed = confirm('Вы хотите добавит еще товар?');
+
+                    if (confirmed) {
+                        var message = prompt('Ввести товар');
+                        basket.add(message);
+                        return b();
+                    }
+                   /* if (!confirmed) {
+                        alert('Товар не найден');
+
+                    }*/
+
+
+                }
+                return b();
+
 
             }
             if (!confirmed) {
-                alert('Товар не добавлен');
+                alert('Товар не найден');
+                var a = function () {
+                    var confirmed = confirm('Вы хотите попробовать еще раз?');
+
+                    if (confirmed) {
+                        var message = prompt('Ввести товар');
+                        basket.add(message);
+                        basket.addItems();
+                    }
+                   /* if (!confirmed) {
+                        alert('Товар не найден');
+
+                    }*/
+
+                }
+                return a();
+
+
                 //document.write('ООК');
             }
         },
@@ -88,14 +124,15 @@
             if (confirmed) {
                 for (var i = 0; i < this.ListOfItems.length; i++) {
                     if (basket.ListOfItems.length > 0) {
-                    }
-                    var message = prompt('Сейчас в корзине ' +  this.ListOfItems[i].name+ ' Ввести товар для удаления');
-                    return basket.MinusItem(message);
+
+                    var message = prompt('Ввести товар для удаления');
+
+                    return basket.MinusItem(message);}
                 }
             }
 
         },
-        MinusItem: function (paramDel){
+        MinusItem: function (paramDel) {
             this.ListOfItems.splice(this.ListOfItems.indexOf(paramDel), 1);
             document.write('Удален ' + paramDel);
 
@@ -104,16 +141,11 @@
 
 
     basket.addItems();
-    //addItems();
-    // basket.inBasket();
-    //document.write('Сейчас в корзине ' + basket.ListOfItems);
-    basket.InBasket();
-    basket.addItems();
+
     basket.delItem();
     basket.InBasket();
 
-    //console.log(basket.ListOfItems);
-    //document.write('Сейчас в корзине ' + basket.ListOfItems);
+    
 </script>
 
 </body>
