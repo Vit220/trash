@@ -32,6 +32,7 @@
             var found = false;
             for (var i = 0; i < goods.length; i++) {
                 if (goods[i].name == param1) {
+                this.ListOfItems.push(goods[i]);
                     found = true;
 
                     break;
@@ -43,7 +44,7 @@
                 return;
             }
             if (found == true) {
-                this.ListOfItems.push(param1);
+                //this.ListOfItems.push(param1);
                 document.write('Добавлен ' + param1);
             }
 
