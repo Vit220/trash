@@ -25,16 +25,17 @@
     var basket = {
 
         ListOfItems: [],
-        ListOfPrice: [],
-        
+
+        price: function () {
+
+        },
         add: function (param1) {
             //console.log(param1)
             var found = false;
             for (var i = 0; i < goods.length; i++) {
                 if (goods[i].name == param1) {
-                this.ListOfItems.push(goods[i]);
                     found = true;
-
+                    this.ListOfItems.push(goods[i]);
                     break;
                 }
             }
@@ -64,23 +65,42 @@
             }
         },
 
-      
+
         InBasket: function () {
+            var a = 0;
+            for (var i = 0; i < this.ListOfItems.length; i++) {
+                //console.log('Item name: ' + this.ListOfItems[i].name + ' Price: ' + this.ListOfItems[i].price);
 
-            for (var i =0; i < this.ListOfItems.lengthl i++ ) {
-                console.log('Item name: ' + this.ListOfItems[i].name + ' Price: ' + this.ListOfItems[i].price);
-                
+                if (basket.ListOfItems.length > 0) {
+                    document.write('В корзине ' + this.ListOfItems[i].name + ' Цена: ' + this.ListOfItems[i].price + ' Количество - ' + basket.ListOfItems.length);
+                    a += this.ListOfItems[i].price;
+                    document.write('Итого ' + a);
+                } else {
+                    document.write('В корзине пусто');
+                }
             }
 
+        },
+        delItem: function () {
+            var confirmed = confirm('Вы хотите удалить товар?');
 
-            if (basket.ListOfItems.length > 0) {
-                document.write('Сейчас в корзине ' + basket.ListOfItems + ' Количество - ' + basket.ListOfItems.length);
-            } else {
-                document.write('В корзине пусто');
+
+            if (confirmed) {
+                for (var i = 0; i < this.ListOfItems.length; i++) {
+                    if (basket.ListOfItems.length > 0) {
+                    }
+                    var message = prompt('Сейчас в корзине ' +  this.ListOfItems[i].name+ ' Ввести товар для удаления');
+                    return basket.MinusItem(message);
+                }
             }
 
+        },
+        MinusItem: function (paramDel){
+            this.ListOfItems.splice(this.ListOfItems.indexOf(paramDel), 1);
+            document.write('Удален ' + paramDel);
 
-        }}
+        }
+    }
 
 
     basket.addItems();
@@ -89,7 +109,10 @@
     //document.write('Сейчас в корзине ' + basket.ListOfItems);
     basket.InBasket();
     basket.addItems();
+    basket.delItem();
     basket.InBasket();
+
+    //console.log(basket.ListOfItems);
     //document.write('Сейчас в корзине ' + basket.ListOfItems);
 </script>
 
