@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+    var goods = [
+        {
+            name: 'Iphone',
+            price: 9000
+
+        },
+        {
+            name: 'Чехол',
+            price: 900
+
+        }
+    ];
+
+
+    var basket = {
+
+        ListOfItems: [],
+        ListOfPrice: [],
+        
+        add: function (param1) {
+            //console.log(param1)
+            var found = false;
+            for (var i = 0; i < goods.length; i++) {
+                if (goods[i].name == param1) {
+                    found = true;
+
+                    break;
+                }
+            }
+
+            if (!found) {
+                alert('Товара нет');
+                return;
+            }
+            if (found == true) {
+                this.ListOfItems.push(param1);
+                document.write('Добавлен ' + param1);
+            }
+
+
+        },
+        addItems: function () {
+            var confirmed = confirm('Вы хотите добавить товар?');
+
+            if (confirmed) {
+                var message = prompt('Ввести товар');
+                return basket.add(message);
+
+            }
+            if (!confirmed) {
+                alert('Товар не добавлен');
+                //document.write('ООК');
+            }
+        },
+
+        /*inBasket: function () {
+         var a = 0;
+         for (var i = 0; i < this.ListOfItems.length; i++) {
+         a = this.ListOfItems[i];
+         document.write('Товар ' + i, ' в корзине');
+         }
+         },*/
+
+        InBasket: function () {
+
+            if (basket.ListOfItems.length > 0) {
+                document.write('Сейчас в корзине ' + basket.ListOfItems + ' Количество - ' + basket.ListOfItems.length);
+            } else {
+                document.write('В корзине пусто');
+            }
+
+
+        }}
+
+
+    basket.addItems();
+    //addItems();
+    // basket.inBasket();
+    //document.write('Сейчас в корзине ' + basket.ListOfItems);
+    basket.InBasket();
+    basket.addItems();
+    basket.InBasket();
+    //document.write('Сейчас в корзине ' + basket.ListOfItems);
+</script>
+
+</body>
+</html>
