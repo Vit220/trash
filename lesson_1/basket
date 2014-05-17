@@ -63,14 +63,7 @@
             }
         },
 
-        /*inBasket: function () {
-         var a = 0;
-         for (var i = 0; i < this.ListOfItems.length; i++) {
-         a = this.ListOfItems[i];
-         document.write('Товар ' + i, ' в корзине');
-         }
-         },*/
-
+      
         InBasket: function () {
 
             if (basket.ListOfItems.length > 0) {
