@@ -34,8 +34,38 @@
             var found = false;
             for (var i = 0; i < goods.length; i++) {
                 if (goods[i].name == param1) {
-                    found = true;
-                    this.ListOfItems.push(goods[i]);
+                    //искать нечего это первый товар в корзине
+                    if (this.ListOfItems.length == 0) {
+                        //вставляем
+                        this.ListOfItems.push(goods[i]);
+                        //у последнего вставленного товара вводим новое свойство
+                        //Индекс последнего вставленного  - это длина массива -1 потому что индексация с 0
+                        this.ListOfItems[this.ListOfItems.length - 1].count = 1;
+                        found = true;
+
+                        //found = true;
+
+                    } else {
+                        //попробуем найти товар в корзине с тем же именем
+                        for (var f = 0; f < this.ListOfItems.length; f++) {
+                            //нашли  - увеличиваем счетчик
+                            if (this.ListOfItems[f].name == param1) {
+                                found = true;
+                                this.ListOfItems[f].count++;
+                            }
+
+                        }
+
+                        //не нашли в корзине значит все таки вставляем
+                        if (goods[i].name == param1) {
+                            this.ListOfItems.push(goods[i]);
+                            //у последнего вставленного товара вводим новое свойство
+                            this.ListOfItems[this.ListOfItems.length - 1].count = 1;
+                            found = true;
+
+                        }
+
+                    }
                     break;
                 }
             }
@@ -74,9 +104,11 @@
                     if (confirmed) {
                         var message = prompt('Ввести товар');
                         basket.add(message);
-                        return b();
+                        //return b();
                     }
-
+                    if (!confirmed) {
+                        basket.InBasket();
+                    }
 
                 }
 
@@ -98,12 +130,12 @@
                 if (basket.ListOfItems.length > 0) {
                     document.write('В корзине ' + this.ListOfItems[i].name + ' Цена: ' + this.ListOfItems[i].price + '<br>');
                     a += this.ListOfItems[i].price;
-
+                    document.write(' Количество товаров - ' + basket.ListOfItems[i].count + '<br>');
 
                 } else {
                     document.write('В корзине пусто' + '<br>');
                 }
-                document.write(' Количество товаров - ' + basket.ListOfItems.length + '<br>');
+                //document.write(' Количество товаров - ' + basket.ListOfItems[i].count + '<br>');
                 document.write('Итого ' + a + '<br>');
 
             }
@@ -116,17 +148,28 @@
 
             if (confirmed) {
                 var message = prompt('Ввести товар для удаления');
-                var s;
+                //var s;
                 for (var i = 0; i < basket.ListOfItems.length; i++) {
-                    if (basket.ListOfItems[i] == message) {
-                        var s = this.ListOfItems.indexOf(message);
-                    }
-                    if (basket.ListOfItems[i] == message) {
-                        this.ListOfItems.splice(s, 1);
-                        document.write('Удален ' + message + '<br>');
-                        break;
+                    if (basket.ListOfItems[i].name == message) {
+                        if (basket.ListOfItems[i].count == 1) {
+                            this.ListOfItems.splice(i, 1);
+                            document.write('Удален ' + message + '<br>');
+                            basket.InBasket();
+                            break;
+
+                        } else {
+                            document.write('Удален ' + message + '<br>');
+                            //this.ListOfItems.splice(i, 1);
+                            basket.ListOfItems[i].count--;
+                            basket.InBasket();
+                            break;
+                        }
+
                     }
                 }
+            }
+            if (!confirmed) {
+                basket.InBasket();
             }
 
         }
@@ -137,6 +180,7 @@
 
     basket.delItem();
     basket.InBasket();
+    //console.log(basket.ListOfItems);
     //console.log(basket.sum(basket.ListOfItems));
 
 </script>
