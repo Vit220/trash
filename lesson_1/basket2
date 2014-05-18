@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+    var goods = [
+        {
+            name: 'Iphone',
+            price: 9000
+
+        },
+        {
+            name: 'Чехол',
+            price: 900
+
+        }
+    ];
+
+
+    var basket = {
+
+        ListOfItems: [],
+
+        price: function () {
+
+        },
+        add: function (param1) {
+            //console.log(param1)
+            var found = false;
+            for (var i = 0; i < goods.length; i++) {
+                if (goods[i].name == param1) {
+                    found = true;
+                    this.ListOfItems.push(goods[i]);
+                    break;
+                }
+            }
+
+            if (!found) {
+                alert('Товара нет');
+                var confirmed = confirm('Вы хотите попробовать еще раз?');
+                if (confirmed) {
+                    var message = prompt('Ввести товар');
+
+                    basket.add(message);
+                }
+                if (!confirmed) {
+                    basket.InBasket();
+                }
+                //return;
+            }
+            if (found == true) {
+                //this.ListOfItems.push(param1);
+                document.write( 'Добавлен ' + param1 + '<br>');
+            }
+
+
+        },
+        addItems: function () {
+            var confirmed = confirm('Вы хотите добавить товар?');
+
+            if (confirmed) {
+                var message = prompt('Ввести товар');
+
+                basket.add(message);
+
+                var b = function () {
+                    var confirmed = confirm('Вы хотите добавит еще товар?');
+
+                    if (confirmed) {
+                        var message = prompt('Ввести товар');
+                        basket.add(message);
+                        return b();
+                    }
+                    /* if (!confirmed) {
+                     alert('Товар не найден');
+
+                     }*/
+
+
+                }
+
+                return b();
+
+
+            }
+            if (!confirmed) {
+                alert('Программа завершена');
+                basket.InBasket();
+                // var a = function () {
+                //   var confirmed = confirm('Вы хотите попробовать еще раз?');
+
+                //   if (confirmed) {
+                //     var message = prompt('Ввести товар');
+                //     basket.add(message);
+                //     basket.addItems();
+                // }
+                //  if (!confirmed) {
+                //  alert('Товар не найден');
+
+                // }
+
+                // }
+                // return a();
+
+
+                //document.write('ООК');
+            }
+        },
+
+
+        InBasket: function () {
+            var a = 0;
+            for (var i = 0; i < this.ListOfItems.length; i++) {
+                //document.write('Item name: ' + this.ListOfItems[i].name + ' Price: ' + this.ListOfItems[i].price);
+
+                if (basket.ListOfItems.length > 0) {
+                    document.write('В корзине ' + this.ListOfItems[i].name + ' Цена: ' + this.ListOfItems[i].price + '<br>');
+                    a += this.ListOfItems[i].price;
+
+
+                } else {
+                    document.write('В корзине пусто' + '<br>');
+                }
+                document.write(' Количество товаров - ' + basket.ListOfItems.length + '<br>');
+                document.write('Итого ' + a + '<br>');
+
+            }
+            //document.write(' Количество - ' + basket.ListOfItems.length);
+            //document.write('Итого ' + a);
+
+        },
+        delItem: function () {
+            var confirmed = confirm('Вы хотите удалить товар?');
+
+
+            if (confirmed) {
+                var message = prompt('Ввести товар для удаления');
+                //var s;
+                for (var i = 0; i < basket.ListOfItems.length; i++) {
+                    if (basket.ListOfItems[i] == message) {
+                        //delete this.ListOfItems[i];
+                        //document.write('Удален ' + this.ListOfItems[i] + '<br>');
+                        //var s = this.ListOfItems.indexOf(message);
+                       // this.ListOfItems.splice(s, 1);
+
+                        //break;
+                    }
+                }
+            }
+
+        } /*,
+         MinusItem: function (paramDel) {
+         this.ListOfItems.splice(this.ListOfItems.indexOf(paramDel), 1);
+         document.write('Удален ' + paramDel);
+
+         }*/
+        /* ggg: function(param){
+
+         console.log(' Количество - ' + basket.ListOfItems.length);
+         console.log('Итого ' + param);
+
+
+        sum: function () {
+            for (var s = 0; s < this.ListOfItems.length; s++) {
+                s += this.ListOfItems[s].price;
+                console.log('fkhfmkmh' + s);
+            }
+        }*/
+    }
+
+
+    basket.addItems();
+
+    basket.delItem();
+    basket.InBasket();
+    //console.log(basket.sum(basket.ListOfItems));
+
+</script>
+
+</body>
+</html>
