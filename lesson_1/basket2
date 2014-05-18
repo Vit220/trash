@@ -42,6 +42,9 @@
                         //Индекс последнего вставленного  - это длина массива -1 потому что индексация с 0
                         this.ListOfItems[this.ListOfItems.length - 1].count = 1;
                         found = true;
+                        /*if(this.ListOfItems[i].hasOwnProperty('count'))
+                        {alert('dfff');
+                        }*/
 
                         //found = true;
 
@@ -104,7 +107,7 @@
                     if (confirmed) {
                         var message = prompt('Ввести товар');
                         basket.add(message);
-                        //return b();
+                        return b();
                     }
                     if (!confirmed) {
                         basket.InBasket();
@@ -129,7 +132,7 @@
             for (var i = 0; i < this.ListOfItems.length; i++) {
                 if (basket.ListOfItems.length > 0) {
                     document.write('В корзине ' + this.ListOfItems[i].name + ' Цена: ' + this.ListOfItems[i].price + '<br>');
-                    a += this.ListOfItems[i].price;
+                    a += this.ListOfItems[i].price * this.ListOfItems[i].count;
                     document.write(' Количество товаров - ' + basket.ListOfItems[i].count + '<br>');
 
                 } else {
