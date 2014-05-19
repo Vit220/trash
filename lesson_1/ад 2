@@ -54,21 +54,23 @@
         },
         del: function () {
             var topic = prompt('Название записи для удаления');
+            var found = false;
             for (var i = 0; i < this.schedule.length; i++) {
                 if (this.schedule[i].heading == topic) {
                     this.schedule.splice(i, 1);
                     document.write('Запись - ' + topic + ' удалена' + '<br>')
+                    var found = true;
                     break;
-
-                } else {
-                    var confirmed3 = confirm('Такой записи нет! Хотите попробовать еще раз?');
-                    if (confirmed3) {
-                        return this.del();
-                    }
 
                 }
             }
+            if (!found) {
+                var confirmed3 = confirm('Такой записи нет! Хотите попробовать еще раз?');
+                if (confirmed3) {
+                    return this.del();
+                }
 
+            }
         },
         editing: function () {
             var confirmed = confirm('Хотите изменить запись?');
@@ -88,7 +90,7 @@
                         this.schedule.splice(i, 1);
                         this.schedule.push({heading: topic, text: message, date: this.now, result: 'выполнено' });
                         found = true;
-                       // this.result();
+                        // this.result();
                         break;
 
                     }
@@ -102,11 +104,12 @@
 
                 }
 
-                if (found == false) {
-                    var confirmed = confirm('Такой записи нет! Хотите попробовать еще раз?');
-                    if (confirmed) {
-                        return this.editingList();
-                    }
+
+            }
+            if (!found) {
+                var confirmed = confirm('Такой записи нет! Хотите попробовать еще раз?');
+                if (confirmed) {
+                    return this.editingList();
                 }
             }
         }
@@ -116,7 +119,7 @@
     catalog.delList();
     catalog.editing();
     catalog.result();
-    
+
 
 </script>
 
