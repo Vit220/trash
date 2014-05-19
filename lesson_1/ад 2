@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    var catalog = {
+
+        schedule: [],
+        now: new Date(),
+
+        addList: function () {
+            var confirmed = confirm('Хотите сделать новую запись?');
+            if (confirmed) {
+                this.add();
+            }
+        },
+        add: function () {
+            var topic = prompt('Название записи');
+            var message = prompt('Введите текст');
+            var confirmed2 = confirm('Хотите пометить как выполненое?')
+            if (confirmed2) {
+                this.schedule.push({heading: topic, text: message, date: this.now, result: 'выполнено' });
+                this.result();
+            }
+            if (!confirmed2) {
+                this.schedule.push({heading: topic, text: message, date: this.now, result: 'не выполнено' });
+                this.result();
+            }
+            this.addList();
+        },
+        result: function () {
+            for (var i = 0; i < this.schedule.length; i++) {
+                if (this.schedule.length > 0) {
+                    document.write(
+                            this.schedule[i].heading + '<br>' + this.schedule[i].date + '<br>' + 'Запись - '
+                                    + this.schedule[i].text + '<br>' + this.schedule[i].result + '<br>'
+                    );
+                } else {
+                    document.write('Записей нет');
+                }
+
+            }
+        },
+        delList: function () {
+            var confirmed = confirm('Хотите удалить запись?');
+            if (confirmed) {
+                this.del();
+            }
+
+        },
+        del: function () {
+            var topic = prompt('Название записи для удаления');
+            for (var i = 0; i < this.schedule.length; i++) {
+                if (this.schedule[i].heading == topic) {
+                    this.schedule.splice(i, 1);
+                    document.write('Запись - ' + topic + ' удалена' + '<br>')
+                    break;
+
+                } else {
+                    var confirmed3 = confirm('Такой записи нет! Хотите попробовать еще раз?');
+                    if (confirmed3) {
+                        return this.del();
+                    }
+
+                }
+            }
+
+        },
+        editing: function () {
+            var confirmed = confirm('Хотите изменить запись?');
+            if (confirmed) {
+                this.editingList();
+            }
+        },
+        editingList: function () {
+            var topic = prompt('Название записи для изменения');
+            var found = false;
+            for (var i = 0; i < this.schedule.length; i++) {
+                if (this.schedule[i].heading == topic) {
+                    var topic = prompt('Введите новое название записи');
+                    var message = prompt('Введите текст(старый будет удален)');
+                    var confirmed2 = confirm('Хотите пометить как выполненое?');
+                    if (confirmed2) {
+                        this.schedule.splice(i, 1);
+                        this.schedule.push({heading: topic, text: message, date: this.now, result: 'выполнено' });
+                        found = true;
+                       // this.result();
+                        break;
+
+                    }
+                    if (!confirmed2) {
+                        this.schedule.splice(i, 1);
+                        this.schedule.push({heading: topic, text: message, date: this.now, result: 'не выполнено' });
+                        found = true;
+                        //this.result();
+                        break;
+                    }
+
+                }
+
+                if (found == false) {
+                    var confirmed = confirm('Такой записи нет! Хотите попробовать еще раз?');
+                    if (confirmed) {
+                        return this.editingList();
+                    }
+                }
+            }
+        }
+    }
+    catalog.addList();
+
+    catalog.delList();
+    catalog.editing();
+    catalog.result();
+    
+
+</script>
+
+</body>
+</html>
