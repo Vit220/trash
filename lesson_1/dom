@@ -6,6 +6,7 @@
 </head>
 <body>
 <input type="button" value="Свойства и атрибуты" onclick="getHtml(idElement);">
+
 <div class="test-div">
         <span attr="attrvalue">
             <p>Paragraph</p>
@@ -49,10 +50,14 @@
 <input type="button" value="I Button">
 
 
-
 <script type="text/javascript">
     var idElement = document.getElementById("diw-with-id");
-
+    var dictionaryTypes = {
+        "1" : "ELEMENT_NODE",
+        "2" : "ATTRIBUTE_NODE",
+        "3" : 'TEXT_NODE',
+        "4" : "COMMENT_NODE"
+    };
     function getHtml(element) {
         for (var i = 0; i < element.childNodes.length; i++) {
             //console.log(i + ". Дочерний элемент:" , element.childNodes[i]);
@@ -62,22 +67,27 @@
             // console.log("Содержимое узла: " + element.childNodes[i].data);
             // console.log("Содержимое nodeValue: " + element.childNodes[i].nodeValue);
             //console.log("Содержимое innerHTML: " + element.childNodes[i].innerHTML);
-            // console.log("Аттрибуты узла: " , element.childNodes[i].attributes);
+            //console.log("Аттрибуты узла: " , element.childNodes[i].attributes);
             // if (element.childNodes[i].attributes) {
             //    console.log('Аттрибуты узла: ', element.childNodes[i].attributes, "\n");
             // } else {
             //    console.log('Узел не содержит аттрибутов.\n')
             // }
 
-            var result = i + ". Дочерний элемент:" + element.childNodes[i] + '<br>' +"Имя узла:" + element.childNodes[i].nodeName;
+            var result = i + ". Дочерний элемент:" + element.childNodes[i] + "Имя узла:" + element.childNodes[i].nodeName +
+                    "Имя тега:" + element.childNodes[i].tagName + "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] +
+                    "Содержимое узла: " + element.childNodes[i].data + "Содержимое nodeValue: " + element.childNodes[i].nodeValue +
+                    "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "Аттрибуты узла: " + element.childNodes[i].attributes;
+
             var newItem = document.createElement("LI");
 
-            var childElement = document.createTextNode(result );
+            var childElement = document.createTextNode(result);
 
-            newItem.appendChild( childElement );
+            newItem.appendChild(childElement);
 
             document.body.appendChild(newItem);
-           //var parentElement = document.getElementsByTagName('body')[0]
+            // parentElement.appendChild(newItem);
+            //var parentElement = document.getElementsByTagName('body')[0]
         }
     }
 
