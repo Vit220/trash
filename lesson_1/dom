@@ -74,16 +74,27 @@
             //    console.log('Узел не содержит аттрибутов.\n')
             // }
 
-            var result = i + ". Дочерний элемент:" + element.childNodes[i] + "Имя узла:" + element.childNodes[i].nodeName +
-                    "Имя тега:" + element.childNodes[i].tagName + "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] +
-                    "Содержимое узла: " + element.childNodes[i].data + "Содержимое nodeValue: " + element.childNodes[i].nodeValue +
-                    "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "Аттрибуты узла: " + element.childNodes[i].attributes;
+            /*var result = i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
+                    "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
+                    "Имя тега:" + element.childNodes[i].tagName + "<br>"+
+                    "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
+                     "Содержимое узла: " + element.childNodes[i].data + "<br>" +
+                    "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
+                    "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
+                    "Аттрибуты узла: " + element.childNodes[i].attributes;*/
 
             var newItem = document.createElement("LI");
+            newItem.innerHTML =  i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
+                    "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
+                    "Имя тега:" + element.childNodes[i].tagName + "<br>"+
+                    "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
+                    "Содержимое узла: " + element.childNodes[i].data + "<br>" +
+                    "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
+                    "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
+                    "Аттрибуты узла: " + element.childNodes[i].attributes;
+            //var childElement = document.createTextNode(result);
 
-            var childElement = document.createTextNode(result);
-
-            newItem.appendChild(childElement);
+            //newItem.appendChild(childElement);
 
             document.body.appendChild(newItem);
             // parentElement.appendChild(newItem);
