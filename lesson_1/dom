@@ -60,30 +60,10 @@
     };
     function getHtml(element) {
         for (var i = 0; i < element.childNodes.length; i++) {
-            //console.log(i + ". Дочерний элемент:" , element.childNodes[i]);
-            // console.log("Имя узла:" + element.childNodes[i].nodeName);
-            // console.log("Имя тега:" + element.childNodes[i].tagName);
-            // console.log("Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType]);
-            // console.log("Содержимое узла: " + element.childNodes[i].data);
-            // console.log("Содержимое nodeValue: " + element.childNodes[i].nodeValue);
-            //console.log("Содержимое innerHTML: " + element.childNodes[i].innerHTML);
-            //console.log("Аттрибуты узла: " , element.childNodes[i].attributes);
-            // if (element.childNodes[i].attributes) {
-            //    console.log('Аттрибуты узла: ', element.childNodes[i].attributes, "\n");
-            // } else {
-            //    console.log('Узел не содержит аттрибутов.\n')
-            // }
 
-            /*var result = i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
-                    "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
-                    "Имя тега:" + element.childNodes[i].tagName + "<br>"+
-                    "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
-                     "Содержимое узла: " + element.childNodes[i].data + "<br>" +
-                    "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
-                    "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
-                    "Аттрибуты узла: " + element.childNodes[i].attributes;*/
 
             var newItem = document.createElement("LI");
+
             newItem.innerHTML =  i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
                     "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
                     "Имя тега:" + element.childNodes[i].tagName + "<br>"+
@@ -92,13 +72,11 @@
                     "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
                     "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
                     "Аттрибуты узла: " + element.childNodes[i].attributes;
-            //var childElement = document.createTextNode(result);
 
-            //newItem.appendChild(childElement);
 
             document.body.appendChild(newItem);
             // parentElement.appendChild(newItem);
-            //var parentElement = document.getElementsByTagName('body')[0]
+
         }
     }
 
