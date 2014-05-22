@@ -71,11 +71,15 @@
 
             var result = i + ". Дочерний элемент:" + element.childNodes[i] + '<br>' +"Имя узла:" + element.childNodes[i].nodeName;
             var newItem = document.createElement("LI");
-            
+
             var childElement = document.createTextNode(result );
-            
+
             newItem.appendChild( childElement );
-            
+
+
+           var  my_div = document.getElementById("diw-with-id");
+            document.body.insertBefore(newItem, my_div);
+
         }
     }
 
