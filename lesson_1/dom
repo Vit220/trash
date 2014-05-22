@@ -76,10 +76,8 @@
 
             newItem.appendChild( childElement );
 
-
-           var  my_div = document.getElementById("diw-with-id");
-            document.body.insertBefore(newItem, my_div);
-
+            document.body.appendChild(newItem);
+           //var parentElement = document.getElementsByTagName('body')[0]
         }
     }
 
