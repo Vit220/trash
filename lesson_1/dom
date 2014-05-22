@@ -65,11 +65,7 @@
     };
     function getHtml(element) {
         for (var i = 0; i < element.childNodes.length; i++) {
-
-            var parent = document.getElementById('test-id');
-            var newItem = document.createElement("LI");
-
-            newItem.innerHTML = i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
+            var s = i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
                     "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
                     "Имя тега:" + element.childNodes[i].tagName + "<br>" +
                     "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
@@ -77,12 +73,17 @@
                     "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
                     "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
                     "Аттрибуты узла: " + element.childNodes[i].attributes;
+        }
+            //var parent = document.getElementById('test-id');
+            var newItem = document.createElement("div");
 
-            parent.appendChild(newItem);
-            //document.body.appendChild(newItem);
+            newItem.innerHTML = s;
+
+           // parent.appendChild(newItem);
+            document.body.appendChild(newItem);
             // parentElement.appendChild(newItem);
 
-        }
+
     }
 
 
