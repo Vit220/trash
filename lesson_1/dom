@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<input type="button" value="Свойства и атрибуты" onclick="getHtml(idElement);">
+
 
 <div class="test-div">
         <span attr="attrvalue">
@@ -49,32 +49,37 @@
 
 <input type="button" value="I Button">
 
+<div id='test-id'>
 
+    <input type="button" value="Свойства и атрибуты" onclick="getHtml(idElement);">
+
+
+</div>
 <script type="text/javascript">
     var idElement = document.getElementById("diw-with-id");
     var dictionaryTypes = {
-        "1" : "ELEMENT_NODE",
-        "2" : "ATTRIBUTE_NODE",
-        "3" : 'TEXT_NODE',
-        "4" : "COMMENT_NODE"
+        "1": "ELEMENT_NODE",
+        "2": "ATTRIBUTE_NODE",
+        "3": 'TEXT_NODE',
+        "4": "COMMENT_NODE"
     };
     function getHtml(element) {
         for (var i = 0; i < element.childNodes.length; i++) {
 
-
+            var parent = document.getElementById('test-id');
             var newItem = document.createElement("LI");
 
-            newItem.innerHTML =  i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
+            newItem.innerHTML = i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
                     "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
-                    "Имя тега:" + element.childNodes[i].tagName + "<br>"+
+                    "Имя тега:" + element.childNodes[i].tagName + "<br>" +
                     "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
                     "Содержимое узла: " + element.childNodes[i].data + "<br>" +
                     "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
                     "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
                     "Аттрибуты узла: " + element.childNodes[i].attributes;
 
-
-            document.body.appendChild(newItem);
+            parent.appendChild(newItem);
+            //document.body.appendChild(newItem);
             // parentElement.appendChild(newItem);
 
         }
