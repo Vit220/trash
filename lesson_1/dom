@@ -64,8 +64,9 @@
         "4": "COMMENT_NODE"
     };
     function getHtml(element) {
+            var s;
         for (var i = 0; i < element.childNodes.length; i++) {
-            var s = i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
+             s += "<br>" + i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
                     "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
                     "Имя тега:" + element.childNodes[i].tagName + "<br>" +
                     "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
@@ -74,6 +75,7 @@
                     "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
                     "Аттрибуты узла: " + element.childNodes[i].attributes;
         }
+
             //var parent = document.getElementById('test-id');
             var newItem = document.createElement("div");
 
