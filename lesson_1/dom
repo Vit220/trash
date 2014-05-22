@@ -5,6 +5,7 @@
     <title></title>
 </head>
 <body>
+<input type="button" value="Свойства и атрибуты" onclick="getHtml(idElement);">
 <div class="test-div">
         <span attr="attrvalue">
             <p>Paragraph</p>
@@ -47,7 +48,7 @@
 
 <input type="button" value="I Button">
 
-<input type="button" value="Свойства и атрибуты" onclick="getHtml(idElement);">
+
 
 <script type="text/javascript">
     var idElement = document.getElementById("diw-with-id");
@@ -68,13 +69,13 @@
             //    console.log('Узел не содержит аттрибутов.\n')
             // }
 
-            //var result = i + ". Дочерний элемент:" + element.childNodes[i] + '<br>' +"Имя узла:" + element.childNodes[i].nodeName;
-
-            element.innerHTML = i + ". Дочерний элемент:" + element.childNodes[i] + '<br>' + "Имя узла:" + element.childNodes[i].nodeName;
-            //var childElement = document.createTextNode(result );
-            // element.appendChild( childElement );
-
-            //return result;
+            var result = i + ". Дочерний элемент:" + element.childNodes[i] + '<br>' +"Имя узла:" + element.childNodes[i].nodeName;
+            var newItem = document.createElement("LI");
+            
+            var childElement = document.createTextNode(result );
+            
+            newItem.appendChild( childElement );
+            
         }
     }
 
