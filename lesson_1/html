@@ -171,27 +171,31 @@
                     allTeg.push(element.childNodes[g].tagName);
                 }
                 if (element.childNodes[g].hasChildNodes()) {
-                    Teg(element.childNodes[g]);
+                    TegAll(element.childNodes[g]);
                 }
             }
         }
 
         for (var i = 0; i < allTeg.length; i++) {
+            allTeg[i] = allTeg[i].toLowerCase();
+            console.log(allTeg[i]);
             if (teg == allTeg[i]) {
                 Xteg = true;
-                a = allTeg[i];
-            } else {
-                Xteg = false;
-            }
-            if (!Xteg) {
-                alert("Такого тега нет");
-            }
-            else {
+               // a = allTeg[i];
+                var parentElement =  document.getElementById(allTeg[i]);      // что тут ставить? как удалить?
+                var childElement = parentElement.getElementsByTagName(teg);
+                parentElement.removeChild(childElement);
+            } else {   Xteg = false;  }
+           // if (!Xteg) {console.log(allTeg[i]); }
+            /*else {
                 var parentElement = document.getElementById(teg);
                 var childElement = parentElement.getElementsByTagName(a);
                 parentElement.removeChild(childElement);
-            }
+            }*/
         }
+
+        if (!Xteg) {console.log("Not Found"); }
+
     }
 
 
