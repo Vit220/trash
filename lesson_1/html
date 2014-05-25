@@ -1,153 +1,192 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title></title>
 </head>
 <body>
-
-
-<div class="test-div">
+<div id='test-id'>
+    <div class="test-div">
         <span attr="attrvalue">
             <p>Paragraph</p>
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
+			<a> моя ссылка</a>
         </span>
+        <p>Paragraph 2</p>
+        <a> Link6</a>
+        <h2>H2 tag</h2>
+    </div>
 
-    <p>Paragraph 2</p>
-    <a> Link6</a>
+    <div id="diw-with-id" style="color:blue">
+        <a href="#">Link4</a>
+        <table>
+        </table>
 
-    <h2>H2 tag</h2>
-</div>
+        <a href="/"></a>
+        <span></span>
+        <div accesskey="some-key" class="some-test-class"></div>
 
-<div id="diw-with-id" style="color:blue">
-    <a href="#">Link4</a>
-    <table>
-    </table>
-    <a href="/"></a>
-    <span></span>
+        <a> Link5</a>
 
-    <div accesskey="some-key" class="some-test-class"></div>
+        <div></div>
 
-    <a> Link5</a>
+    </div>
 
-    <div></div>
+    <a href="#">Link3</a>
 
-</div>
+    <article>
+        Article tag
+        <a href="#"></a>
+    </article>
 
-<a href="#">Link3</a>
-
-<article>
-    Article tag
-    <a href="#"></a>
-</article>
-
-<input type="text" placeholder="Введите тег для удаления...">
+    <input id="DelTeg" type="text" placeholder="Введите тег для удаления...">
 
 
-<input type="button" value="I button">
+    <input type="button" value="I button" onclick="getInput();">
 
-<input type="button" value="I Button">
+    <input type="button" value="I Button">
 
-<div id='test-id'>
-
-    <input type="button" value="Свойства и атрибуты" onclick="getHtml(idElement);">
-
-
+    <div id="myDiv" style="color:#BC8F8F">Описание</div>
 </div>
 <script type="text/javascript">
-    var idElement = document.body;
+    //  	var idsElement = document.getElementById('diw-with-id');
+    var idsElement = document.getElementsByClassName('test-div')[0];
+    console.log(idsElement);
     var dictionaryTypes = {
-        "1": "ELEMENT_NODE",
-        "2": "ATTRIBUTE_NODE",
-        "3": 'TEXT_NODE',
-        "4": "COMMENT_NODE"
+        "1" : "ELEMENT_NODE",
+        "2" : "ATTRIBUTE_NODE",
+        "3" : 'TEXT_NODE',
+        "4" : "COMMENT_NODE"
     };
-    function getHtml(element) {
-            var s;
-        for (var i = 0; i < element.childNodes.length; i++) {
-             s += "<br>" + i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
-                    "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
-                    "Имя тега:" + element.childNodes[i].tagName + "<br>" +
-                    "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
-                    "Содержимое узла: " + element.childNodes[i].data + "<br>" +
-                    "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
-                    "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
-                    "Аттрибуты узла: " + element.childNodes[i].attributes;
+
+    var newDiv = document.createElement('div');
+    //debugger;
+    function getAttributes ( element ) {
+        //     console.log(element.attributes);
+        //       console.log("Имя узла:" + element.nodeName);
+        //    console.log("Имя тега:" + element.tagName);
+        //    console.log("Тип узла: " + dictionaryTypes[element.nodeType]);
+        //    console.log("Содержимое узла: " + element.data);
+        //    console.log("Содержимое nodeValue: " + element.nodeValue);
+        //    console.log("Содержимое innerHTML: " + element.innerHTML);
+        newDiv.innerHTML += "Свойства элементов<br>";
+        newDiv.innerHTML += "Имя узла:" + element.nodeName+"<br>";
+        newDiv.innerHTML += "Тип узла: " + dictionaryTypes[element.nodeType]+";  ";
+        newDiv.innerHTML += "Содержимое узла: " + element.data+";  ";
+        newDiv.innerHTML += "Содержимое nodeValue: " + element.nodeValue+";  ";
+        newDiv.innerHTML += "Содержимое innerHTML: " + element.innerHTML+"<br>";
+
+
+        //console.log("Аттрибуты узла: " , idsElement.childNodes[i].attributes);
+
+        if ( element.hasAttributes() ) {
+            newDiv.innerHTML += "Атрибуты элементов<br>";
+            for ( var i = 0; i < element.attributes.length; i++ ) {
+                if ( typeof element.attributes[i] != 'function' ) {
+                    newDiv.innerHTML +="Имя атрибута: " + element.attributes[i].nodeName + " Значение: "+ element.getAttribute( element.attributes[i].nodeName );
+                    //console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );
+                }
+            }
+            newDiv.innerHTML +="<br>";
+        }
+        else {
+            console.log('Узел не содержит аттрибутов.\n')
+        }
+        if (element.hasChildNodes()){
+            for(var i=0; i<element.childNodes.length; i++){
+                if (element.childNodes[i].nodeType!=3){getAttributes(element.childNodes[i]);}
+            }
 
         }
-
-            //var parent = document.getElementById('test-id');
-            var newItem = document.createElement("div");
-
-            newItem.innerHTML = s;
-
-           // parent.appendChild(newItem);
-            document.body.appendChild(newItem);
-            // parentElement.appendChild(newItem);
-
-
+        document.getElementById('myDiv').appendChild(newDiv);
     }
-    var f = document.getElementById("diw-with-id");
-    function getA(element){
-        var d=0;
-        var f=0;
-        /*for (var i = 0; i < element.childNodes.length; i++){
 
-            if(element.childNodes[i].nodeName == 'A'){
-                if(element.childNodes[i].nodeName == 'href'){
-                    f++;
-                }else{ d++;}
-            }
-        }*/
-        /*var A=element.getElementsByTagName('a');
-        for (var w = 0; w < A.length; w++){
-            for (var i=0; i<A[w].attributes.length;i++){
-            if(A[w].attributes[i] == 'href'){
-                f++;
-            }else{d++;}
-            }
-        }*/
-        var A = element.getElementsByTagName( 'a' );
-        var newItem = document.createElement("div");
-        newItem.style.color = 'red';
-        for ( var w = 0; w < A.length; w++ ) {
-            var NewAttribut = false;
-            for ( var i = 0; i < A[w].attributes.length; i++ ) {
-                if ( A[w].getAttribute( 'href' ).length > 0 ) {
-                    f++;
-                    NewAttribut = true;
-                }
-                if(!NewAttribut){
-                    var valid = document.createAttribute( "not-valid" );
-                    valid.nodeValue = "true";
-                    A[w].attributes.setNamedItem(valid);
-                }
-            }
-        }
-
-        d = A.length - f;
-
-        newItem.innerHTML +="Валидных сылок: " + f + '<br>';
-        newItem.innerHTML +="Не валидных сылок: " + d + '<br>';
-        element.appendChild(newItem);
-        console.log(f, d);
+    getAttributes(idsElement);
 
 
-           /* if ( element.hasAttributes() ) {
-                for ( var i = 0; i < element.attributes.length; i++ ) {
-                    if ( typeof element.attributes[i] != 'function' ) {
-                        console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );
+    function validA( element ){
+        var Val=0;
+        var NotVal=0;
+        var ValDiv = document.createElement('div');
+        ValDiv.style.color = 'red';
+        if (element.hasChildNodes()){
+            //for(var i=0; i<element.childNodes.length; i++){
+            //	console.log(element.childNodes[i].tagName);
+            //	console.log(element.childNodes[i].tagName=='a');//почему не работает???
+            var allA=element.getElementsByTagName('a')
+            console.log(allA[2]);
+            for ( var j = 0; j < allA.length; j++ ) {
+                var ValOrNot=false;
+                for (var i=0; i<allA[j].attributes.length;i++){
+                    if (allA[j].attributes[i].nodeName=='href'){
+                        Val++;
+                        ValOrNot=true;
+
                     }
                 }
-            }*/
+                if (!ValOrNot){NotVal++;
+                    var validAttribute = document.createAttribute( "not-valid" );
+                    validAttribute.nodeValue = "true";
+                    allA[j].attributes.setNamedItem(validAttribute);
+                }
+            }
+            ValDiv.innerHTML+='Валидных ссылок: '+Val+"<br>";
+            ValDiv.innerHTML+='Не валидных ссылок: '+NotVal+"<br>";
+            element.appendChild(ValDiv);
+            console.log('Валидных:'+Val);
+            console.log('не валидных:'+NotVal)};
 
-        
     }
 
-getA(idElement);
+    validA( idsElement );
 
+    console.log(document.childNodes.length);
+    var allTeg=[];
+    var l1=document.childNodes[1];
+    function GetAllTeg(element){
+        for (var i=0; i<element.childNodes.length;i++){
+            if (!(element.childNodes[i].tagName==undefined)){
+                allTeg.push(element.childNodes[i].tagName);}
+            if (element.childNodes[i].hasChildNodes()){
+                GetAllTeg(element.childNodes[i]);
+            }
+        }
+        //	console.log(document.childNodes[])
+    }
 
+    function getInput(){
+        teg=document.getElementById('DelTeg').value;
+        validTeg=false;
+        //	allTeg=element.getElementsByTagName('teg');
+        for(var i=0;i<allTeg.length;i++){
+            if (teg==allTeg[i]){
+                validTeg=true;
+                i=allTeg.length;
+            }
+        }
+        if (!validTeg){alert('тег не найден');}
+        else{
+            var parentElement = document.getElementById( 'test-id' );
+            var childElement = parentElement.getElementsByTagName(teg);
+            console.log(teg);
+            console.log(parentElement);
+            console.log(childElement[0]);
+            console.log(childElement.length);
+
+            /*for (var j=0;j<childElement.length;j++){
+             parentElement.removeChild(childElement[j]);
+             }*/
+            parentElement.removeChild(childElement[1]);
+        }
+
+    }
+
+    GetAllTeg(l1);
+    console.log(allTeg);
+    console.log(document.getElementById('test-id'));
+
+    //Воросы: как втавить новый тег вконце боди?  почему не работает hasChildNodes() для текста???; 111
 
 
     /**
