@@ -114,7 +114,7 @@
         for ( var w = 0; w < A.length; w++ ) {
             var NewAttribut = false;
             for ( var i = 0; i < A[w].attributes.length; i++ ) {
-                if ( A[w].getAttribute( 'href' ).length > 0 ) {
+                if ( A[w].attributes[i].nodeName=='href' ) { // if ( A[w].getAttribute( 'href' ).length > 0 )
                     f++;
                     NewAttribut = true;
                 }else{NewAttribut = false;}
