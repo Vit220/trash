@@ -1,1 +1,175 @@
-sfv
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<div class="test-div">
+        <span attr="attrvalue">
+            <p>Paragraph</p>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+        </span>
+
+    <p>Paragraph 2</p>
+    <a> Link6</a>
+
+    <h2>H2 tag</h2>
+</div>
+
+<div id="diw-with-id" style="color:blue">
+    <a href="#">Link4</a>
+    <table>
+    </table>
+    <a href="/"></a>
+    <span></span>
+
+    <div accesskey="some-key" class="some-test-class"></div>
+
+    <a> Link5</a>
+
+    <div></div>
+
+</div>
+
+<a href="#">Link3</a>
+
+<article>
+    Article tag
+    <a href="#"></a>
+</article>
+
+<input type="text" placeholder="Введите тег для удаления...">
+
+
+<input type="button" value="I button">
+
+<input type="button" value="I Button">
+
+<div id='test-id'>
+
+    <input type="button" value="Свойства и атрибуты" onclick="getHtml(idElement);">
+
+
+</div>
+<script type="text/javascript">
+    var idElement = document.body;
+    var dictionaryTypes = {
+        "1": "ELEMENT_NODE",
+        "2": "ATTRIBUTE_NODE",
+        "3": 'TEXT_NODE',
+        "4": "COMMENT_NODE"
+    };
+    function getHtml(element) {
+            var s;
+        for (var i = 0; i < element.childNodes.length; i++) {
+             s += "<br>" + i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
+                    "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
+                    "Имя тега:" + element.childNodes[i].tagName + "<br>" +
+                    "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
+                    "Содержимое узла: " + element.childNodes[i].data + "<br>" +
+                    "Содержимое nodeValue: " + element.childNodes[i].nodeValue + "<br>" +
+                    "Содержимое innerHTML: " + element.childNodes[i].innerHTML + "<br>" +
+                    "Аттрибуты узла: " + element.childNodes[i].attributes;
+
+        }
+
+            //var parent = document.getElementById('test-id');
+            var newItem = document.createElement("div");
+
+            newItem.innerHTML = s;
+
+           // parent.appendChild(newItem);
+            document.body.appendChild(newItem);
+            // parentElement.appendChild(newItem);
+
+
+    }
+    var f = document.getElementById("diw-with-id");
+    function getA(element){
+        var d=0;
+        var f=0;
+        /*for (var i = 0; i < element.childNodes.length; i++){
+
+            if(element.childNodes[i].nodeName == 'A'){
+                if(element.childNodes[i].nodeName == 'href'){
+                    f++;
+                }else{ d++;}
+            }
+        }*/
+        /*var A=element.getElementsByTagName('a');
+        for (var w = 0; w < A.length; w++){
+            for (var i=0; i<A[w].attributes.length;i++){
+            if(A[w].attributes[i] == 'href'){
+                f++;
+            }else{d++;}
+            }
+        }*/
+        var A = element.getElementsByTagName( 'a' );
+        var newItem = document.createElement("div");
+        newItem.style.color = 'red';
+        for ( var w = 0; w < A.length; w++ ) {
+            var NewAttribut = false;
+            for ( var i = 0; i < A[w].attributes.length; i++ ) {
+                if ( A[w].getAttribute( 'href' ).length > 0 ) {
+                    f++;
+                    NewAttribut = true;
+                }else{NewAttribut = false;}
+                if(!NewAttribut){
+                    var valid = document.createAttribute( "not-valid" );
+                    valid.nodeValue = "true";
+                    A[w].attributes.setNamedItem(valid);
+                }
+
+            }
+
+        }
+
+        d = A.length - f;
+
+        newItem.innerHTML +="Валидных сылок: " + f + '<br>';
+        newItem.innerHTML +="Не валидных сылок: " + d + '<br>';
+        element.appendChild(newItem);
+        console.log(f, d);
+
+
+           /* if ( element.hasAttributes() ) {
+                for ( var i = 0; i < element.attributes.length; i++ ) {
+                    if ( typeof element.attributes[i] != 'function' ) {
+                        console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );
+                    }
+                }
+            }*/
+
+
+    }
+
+getA(idElement);
+
+
+
+
+
+
+    /**
+     * 1. Написать функцию которая получает как параметр HTML элеемент и выводит на екран все свойства и все атрибуты себя и всех дочерних елементов.
+     * Вывод на экран осуществляется вставкой в <body> тега <div>  и информации в нем.
+     *
+     * 2. Написать функцию которая получает как параметр HTML элемент и подсчитывает колличество
+     * валидных ссылок и колличество неправильных ссылок ( тех у кого не указан аттрибут href) и вставляет эту инфорцмацию в переданный елемент в теге <div> красным текстов
+     *
+     * 3. Модифицировать функцию из пункта 2  чтобы она всем неправильным ссылкам добавляла аттрибут not-valid со значением true.
+     *
+     * 4. Написать функцию которая забирает значение input.
+     * В это поле можно ввести имя тега. Функция должна срабатывать по клику на кнопку и должна удалять из документа все теги с таким именем.
+     * Перед удалением функция должна собирать список всех возможных тегов документа и проверять введенное имя на валидность.
+     * Статистику удаления должна вставлятся ввиде textNode в конец документа.
+     *
+     * 5. Написать функцию которая получает на входе елемент и выводит в консоль все елементы с таким же тегом на ее уровне.
+     */
+</script>
+</body>
+</html>
