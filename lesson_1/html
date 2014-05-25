@@ -100,18 +100,55 @@
                 }else{ d++;}
             }
         }*/
-        var A=element.getElementsByTagName('a');
+        /*var A=element.getElementsByTagName('a');
         for (var w = 0; w < A.length; w++){
             for (var i=0; i<A[w].attributes.length;i++){
             if(A[w].attributes[i] == 'href'){
                 f++;
             }else{d++;}
             }
+        }*/
+        var A = element.getElementsByTagName( 'a' );
+        var newItem = document.createElement("div");
+        newItem.style.color = 'red';
+        for ( var w = 0; w < A.length; w++ ) {
+            var NewAttribut = false;
+            for ( var i = 0; i < A[w].attributes.length; i++ ) {
+                if ( A[w].getAttribute( 'href' ).length > 0 ) {
+                    f++;
+                    NewAttribut = true;
+                }
+                if(!NewAttribut){
+                    var valid = document.createAttribute( "not-valid" );
+                    valid.nodeValue = "true";
+                    A[w].attributes.setNamedItem(valid);
+                }
+            }
         }
+
+        d = A.length - f;
+
+        newItem.innerHTML +="Валидных сылок: " + f + '<br>';
+        newItem.innerHTML +="Не валидных сылок: " + d + '<br>';
+        element.appendChild(newItem);
         console.log(f, d);
     }
 
-getA(f);
+getA(idElement);
+
+    function getAttributes ( element ) {
+
+        console.log(element.attributes);
+
+        if ( element.hasAttributes() ) {
+            for ( var i = 0; i < element.attributes.length; i++ ) {
+                if ( typeof element.attributes[i] != 'function' ) {
+                    console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );
+                }
+            }
+        }
+    }
+    getAttributes(f);
 
 
     /**
