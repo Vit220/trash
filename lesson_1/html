@@ -42,12 +42,13 @@
     <a href="#"></a>
 </article>
 
-<input type="text" placeholder="Введите тег для удаления...">
+<input id="txt" type="text" placeholder="Введите тег для удаления...">
 
 
-<input type="button" value="I button">
+<input id="btn" type="button" value="I button">
 
 <input type="button" value="I Button">
+
 
 <div id='test-id'>
 
@@ -64,9 +65,9 @@
         "4": "COMMENT_NODE"
     };
     function getHtml(element) {
-            var s;
-        for (var i = 0; i < element.childNodes.length; i++) {
-             s += "<br>" + i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
+        var s;
+        {
+            s += "<br>" + i + ". Дочерний элемент:" + element.childNodes[i] + "<br>" +
                     "Имя узла:" + element.childNodes[i].nodeName + "<br>" +
                     "Имя тега:" + element.childNodes[i].tagName + "<br>" +
                     "Тип узла: " + dictionaryTypes[element.childNodes[i].nodeType] + "<br>" +
@@ -77,52 +78,53 @@
 
         }
 
-            //var parent = document.getElementById('test-id');
-            var newItem = document.createElement("div");
+        //var parent = document.getElementById('test-id');
+        var newItem = document.createElement("div");
 
-            newItem.innerHTML = s;
+        newItem.innerHTML = s;
 
-           // parent.appendChild(newItem);
-            document.body.appendChild(newItem);
-            // parentElement.appendChild(newItem);
+        // parent.appendChild(newItem);
+        document.body.appendChild(newItem);
+        // parentElement.appendChild(newItem);
 
 
     }
     var f = document.getElementById("diw-with-id");
-    function getA(element){
-        var d=0;
-        var f=0;
+    function getA(element) {
+        var d = 0;
+        var f = 0;
         /*for (var i = 0; i < element.childNodes.length; i++){
 
-            if(element.childNodes[i].nodeName == 'A'){
-                if(element.childNodes[i].nodeName == 'href'){
-                    f++;
-                }else{ d++;}
-            }
-        }*/
+         if(element.childNodes[i].nodeName == 'A'){
+         if(element.childNodes[i].nodeName == 'href'){
+         f++;
+         }else{ d++;}
+         }
+         }*/
         /*var A=element.getElementsByTagName('a');
-        for (var w = 0; w < A.length; w++){
-            for (var i=0; i<A[w].attributes.length;i++){
-            if(A[w].attributes[i] == 'href'){
-                f++;
-            }else{d++;}
-            }
-        }*/
-        var A = element.getElementsByTagName( 'a' );
+         for (var w = 0; w < A.length; w++){
+         for (var i=0; i<A[w].attributes.length;i++){
+         if(A[w].attributes[i] == 'href'){
+         f++;
+         }else{d++;}
+         }
+         }*/
+        var A = element.getElementsByTagName('a');
         var newItem = document.createElement("div");
         newItem.style.color = 'red';
-        for ( var w = 0; w < A.length; w++ ) {
+        for (var w = 0; w < A.length; w++) {
             var NewAttribut = false;
-            for ( var i = 0; i < A[w].attributes.length; i++ ) {
-                if ( A[w].attributes[i].nodeName=='href' ) { // if ( A[w].getAttribute( 'href' ).length > 0 )
+
+            for (var i = 0; i < A[w].attributes.length; i++) {
+                if (A[w].attributes[i].nodeName == 'href') { // if ( A[w].getAttribute( 'href' ).length > 0 )
                     f++;
                     NewAttribut = true;
                 }
 
 
             }
-            if(!NewAttribut){
-                var valid = document.createAttribute( "not-valid" );
+            if (!NewAttribut) {
+                var valid = document.createAttribute("not-valid");
                 valid.nodeValue = "true";
                 A[w].attributes.setNamedItem(valid);
             }
@@ -131,28 +133,75 @@
 
         d = A.length - f;
 
-        newItem.innerHTML +="Валидных сылок: " + f + '<br>';
-        newItem.innerHTML +="Не валидных сылок: " + d + '<br>';
+        newItem.innerHTML += "Валидных сылок: " + f + '<br>';
+        newItem.innerHTML += "Не валидных сылок: " + d + '<br>';
         element.appendChild(newItem);
         console.log(f, d);
 
 
-           /* if ( element.hasAttributes() ) {
-                for ( var i = 0; i < element.attributes.length; i++ ) {
-                    if ( typeof element.attributes[i] != 'function' ) {
-                        console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );
-                    }
-                }
-            }*/
+        /* if ( element.hasAttributes() ) {
+         for ( var i = 0; i < element.attributes.length; i++ ) {
+         if ( typeof element.attributes[i] != 'function' ) {
+         console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );
+         }
+         }
+         }*/
 
 
     }
 
-getA(idElement);
+    getA(idElement);
 
 
+    /*=======================================444444444444444444====================================================*/
+    document.getElementById("btn").onclick = del;
+    function del() {
+        var teg = document.getElementById("txt").value;
+        //alert('sdfdgd')
+        var Xteg = false;
+        var a;
+        var allTeg = [];
+        TegAll(idElement);
 
 
+        function TegAll(element) {
+
+            for (var g = 0; g < element.childNodes.length; g++) {
+                if (element.childNodes[g].tagName !== undefined) {
+                    allTeg.push(element.childNodes[g].tagName);
+                }
+                if (element.childNodes[g].hasChildNodes()) {
+                    Teg(element.childNodes[g]);
+                }
+            }
+        }
+
+        for (var i = 0; i < allTeg.length; i++) {
+            if (teg == allTeg[i]) {
+                Xteg = true;
+                a = allTeg[i];
+            } else {
+                Xteg = false;
+            }
+            if (!Xteg) {
+                alert("Такого тега нет");
+            }
+            else {
+                var parentElement = document.getElementById(teg);
+                var childElement = parentElement.getElementsByTagName(a);
+                parentElement.removeChild(childElement);
+            }
+        }
+    }
+
+
+    /*========================================5555555555555555555=================================================*/
+
+    function elem(element) {
+        for (var i = 0; i < element.length; i++) {
+
+        }
+    }
 
 
     /**
