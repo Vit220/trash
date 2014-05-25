@@ -176,25 +176,33 @@
             }
         }
 
-        for (var i = 0; i < allTeg.length; i++) {
-            allTeg[i] = allTeg[i].toLowerCase();
-            console.log(allTeg[i]);
-            if (teg == allTeg[i]) {
-                Xteg = true;
-               // a = allTeg[i];
-                var parentElement =  document.getElementById(allTeg[i]);      // что тут ставить? как удалить?
-                var childElement = parentElement.getElementsByTagName(teg);
-                parentElement.removeChild(childElement);
-            } else {   Xteg = false;  }
-           // if (!Xteg) {console.log(allTeg[i]); }
-            /*else {
-                var parentElement = document.getElementById(teg);
-                var childElement = parentElement.getElementsByTagName(a);
-                parentElement.removeChild(childElement);
-            }*/
+         //У тебя есть массив с именами всех тегов. Тут ты молодец. Массив строк по сути. К массиву строк можно применить indexOf()
+        
+        //Ты нашел такой тег. Это поиск по массивам строк
+        if ( allTeg.indexOf( teg ) != -1 ) {
+            
+            //Находишь все теги с таким именем во всем документе
+            var tagsInDoc = document.getElementsByTagName( teg ),
+                    current = null;
+            
+            //Перебираешь их
+            for ( var i = tagsInDoc.length - 1; i >= 0; i-- ) {
+                current = tagsInDoc[i];
+                //Если есть свойство parentNode (оно ссылается на родителя) у нашего тега на текущей итерации то мы просим его удалить нас
+                if ( current.parentNode ) {
+
+                    current.parentNode.removeChild( current );
+                } else {
+                    //Я тут не уверен но по моему у корневых елементов нет ссылки на body если они лежат прямо в нем
+                    document.body.removeChild(current);
+                }
+            }
+            
         }
 
-        if (!Xteg) {console.log("Not Found"); }
+        if ( !Xteg ) {
+            console.log( "Not Found" );
+        }
 
     }
 
