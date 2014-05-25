@@ -62,8 +62,8 @@
         var d=0;
         var f=0;
         for (var i = 0; i < element.childNodes.length; i++){
-            if(element.childNodes[i].tagName == 'A'){
-                if(element.childNodes[i] == 'href'){
+            if(element.childNodes[i].nodeName == 'A'){
+                if(element.childNodes[i].nodeName == 'href'){
                     f++;
                 }else{ d++;}
             }
