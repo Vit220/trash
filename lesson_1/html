@@ -117,13 +117,14 @@
                 if ( A[w].attributes[i].nodeName=='href' ) { // if ( A[w].getAttribute( 'href' ).length > 0 )
                     f++;
                     NewAttribut = true;
-                }else{NewAttribut = false;}
-                if(!NewAttribut){
-                    var valid = document.createAttribute( "not-valid" );
-                    valid.nodeValue = "true";
-                    A[w].attributes.setNamedItem(valid);
                 }
 
+
+            }
+            if(!NewAttribut){
+                var valid = document.createAttribute( "not-valid" );
+                valid.nodeValue = "true";
+                A[w].attributes.setNamedItem(valid);
             }
 
         }
