@@ -63,6 +63,7 @@ var magazyka = {
             
             $button.addEventListener('click', function () {
                 console.log('Нажали купить товар под индексов', this.getAttribute('goods-index'));
+                //self.addItemToCart(this.getAttribute('goods-index'));
             }, false)
 
             $tdButton.appendChild($button);
