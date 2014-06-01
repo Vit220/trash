@@ -56,6 +56,14 @@ var magazyka = {
             $button.type  = 'button';
             $button.value = 'Купить';
             $button.id    = 'buy';
+            
+            var ourNewAttribute = document.createAttribute( "goods-index" );
+            ourNewAttribute.nodeValue = i;
+            $button.attributes.setNamedItem(ourNewAttribute);
+            
+            $button.addEventListener('click', function () {
+                console.log('Нажали купить товар под индексов', this.getAttribute('goods-index'));
+            }, false)
 
             $tdButton.appendChild($button);
 
