@@ -56,6 +56,7 @@ var magazyka = {
             $button.type  = 'button';
             $button.value = 'Купить';
             $button.id    = 'buy';
+            $button.className = 'buy-btn'
             
             var ourNewAttribute = document.createAttribute( "goods-index" );
             ourNewAttribute.nodeValue = i;
@@ -81,7 +82,14 @@ var magazyka = {
         }
 
         var table = document.getElementById("goods");
-        table.appendChild($documentFragment)
+        table.appendChild($documentFragment);
+        
+        table.addEventListener('click', function() {
+            if (event.target.tagName && event.target.tagName == 'input' && event.target.className = 'buy-btn') {
+                cobnsole.log("Индекс твоара", event.target.getAttribute('goods-index'))
+                //console.log('Вы кликнули по товару с именем: ' + event.target.innerHTML + " и ценой: " + event.target.getAttribute('price'));
+            }
+        }, false)
 
        /* self.buy =  document.getElementById('buy');
         self.buy.addEventListener('click', function () {
