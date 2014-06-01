@@ -84,7 +84,7 @@ var magazyka = {
         var table = document.getElementById("goods");
         table.appendChild($documentFragment);
         
-        table.addEventListener('click', function() {
+        table.addEventListener('click', function(event) {
             if (event.target.tagName && event.target.tagName == 'input' && event.target.className = 'buy-btn') {
                 cobnsole.log("Индекс твоара", event.target.getAttribute('goods-index'))
                 //console.log('Вы кликнули по товару с именем: ' + event.target.innerHTML + " и ценой: " + event.target.getAttribute('price'));
