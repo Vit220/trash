@@ -2,7 +2,9 @@ var magazyka = {
 
     buy: null,
 
-    ListOfItems: [],
+    ListOfItems: [
+        
+    ],
 
     goods: [
         {
@@ -19,12 +21,13 @@ var magazyka = {
         }
     ],
 
+
     addGoods: function (param) {
         var found = false,
             self = this;
         for (var i = 0; i < self.goods.length; i++) {
             if (param == i && self.goods[i].number > 0) {
-                if (this.ListOfItems == 0) {
+                if (self.ListOfItems == 0) {
                     self.ListOfItems.push(goods[i]);
                     self.ListOfItems[self.ListOfItems.length - 1].count = 1;
                     self.goods[i].number--;
@@ -44,13 +47,13 @@ var magazyka = {
                     }
                 }
 
-                if(!found){
+                if (!found) {
                     self.ListOfItems.push(goods[i]);
                     self.ListOfItems[self.ListOfItems.length - 1].count = 1;
                     found = true;
                     self.goods[i].number--;
                 }
-
+                self.createBasket();
                 break;
 
             }
@@ -60,6 +63,81 @@ var magazyka = {
             }
         }
 
+    },
+
+    createBasket: function () {
+        var self = this;
+        var $tr,
+            $documentFragment = document.createDocumentFragment(),
+            $tdName,
+            $tdPrice,
+            $tdButton,
+            $tdcount,
+            $buttonDel,
+            $button;
+        for (var i = 0; i < this.ListOfItems.length; i++) {
+            $tr = document.createElement('tr');
+
+            $tdName = document.createElement('td');
+            $tdPrice = document.createElement('td');
+            $tdcount = document.createElement('td');
+            $tdButton = document.createElement('td');
+
+            $tdName.className = "td";
+            $tdPrice.className = "td";
+            $tdcount.className = "td";
+            $tdButton.className = "centre";
+
+            $tdName.innerHTML = this.ListOfItems[i].name;
+            $tdPrice.innerHTML = this.ListOfItems[i].price;
+            $tdcount.innerHTML = this.ListOfItems[i].count;
+
+            $buttonDel = document.createElement('input');
+            $buttonDel.type = 'button';
+            $buttonDel.value = 'Удалить';
+            $buttonDel.id = 'del';
+            //$buttonDel.className =
+
+            $button = document.createElement('input');
+            $button.type = 'button';
+            $button.value = 'Изменить колличество';
+            $button.id = 'change';
+
+            var ourNewAttribute = document.createAttribute("list-index");
+            ourNewAttribute.nodeValue = i;
+            $button.attributes.setNamedItem(ourNewAttribute);
+
+            var DELAttribute = document.createAttribute("list-index");
+            DELAttribute.nodeValue = i;
+            $buttonDel.attributes.setNamedItem(DELAttribute);
+
+            $button.addEventListener('click', function () {
+                console.log('Нажали Изменить колличество под индексом', this.getAttribute('list-index'));
+                // console.log('Вы кликнули по товару с именем: ' + event.target.innerHTML + " и ценой: " + event.target.getAttribute('price'));
+                //self.addGoods(this.getAttribute('goods-index'));
+            }, false)
+
+            $buttonDel.addEventListener('click', function () {
+                console.log('Нажали Удалить под индексом', this.getAttribute('list-index'));
+                // console.log('Вы кликнули по товару с именем: ' + event.target.innerHTML + " и ценой: " + event.target.getAttribute('price'));
+                //self.addGoods(this.getAttribute('goods-index'));
+            }, false)
+
+
+            $tdButton.appendChild($buttonDel);
+            $tdButton.appendChild($button);
+
+            $tr.appendChild($tdName);
+            $tr.appendChild($tdPrice);
+            $tr.appendChild($tdcount);
+            $tr.appendChild($tdButton);
+
+            $documentFragment.appendChild($tr);
+
+        }
+
+        var table = document.getElementById("basket");
+        table.appendChild($documentFragment);
     },
 
     createGoods: function () {
@@ -91,7 +169,7 @@ var magazyka = {
             $button.type = 'button';
             $button.value = 'Купить';
             $button.id = 'buy';
-            $button.className = 'buy-btn'
+            $button.className = 'buy-btn';
 
             var ourNewAttribute = document.createAttribute("goods-index");
             ourNewAttribute.nodeValue = i;
