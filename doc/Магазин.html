@@ -34,7 +34,7 @@
     </tr>
 
 </table>
-<table class="q3">
+<table class="q3" id="basket">
     <caption>Корзина</caption>
     <tr class="w3">
         <th class="td">Название товара</th>
@@ -42,7 +42,7 @@
         <th class="td">Колличество</th>
         <th class="td">Действия</th>
     </tr>
-    <tr class="w2">
+  <!--  <tr class="w2">
         <td class="td">Товар1</td>
         <td class="td">Цена</td>
         <td class="td">Колл</td>
@@ -57,7 +57,7 @@
         <td class="centre"><input type=submit value=Удалить id=del-field12><input type=submit
                                                                                   value="Изменить колличество"
                                                                                   id=change-field12></td>
-    </tr>
+    </tr> -->
 </table>
 <table class="q4">
     <caption><b>Форма оформления заказов</b></caption>
@@ -162,7 +162,7 @@
 
     input {
         border: 2px solid CornflowerBlue;
-        border-radius: 40%;
+
     }
 
     .c {
@@ -207,6 +207,7 @@
 <script type="text/javascript">
     window.onload = function () {
         magazyka.createGoods();
+       // magazyka.createBasket();
     };
 </script>
 </body>
