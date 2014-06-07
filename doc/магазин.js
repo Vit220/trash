@@ -30,45 +30,45 @@ var magazyka = {
             self = this;
         for (var i = 0; i < self.goods.length; i++) {
             if (param == i && self.goods[i].number > 0) {
-                if (self.ListOfItems.length == 0) {
-                    self.ListOfItems.push(self.goods[i]);
-                    self.ListOfItems[self.ListOfItems.length - 1].count = 1;
-                    self.goods[i].number--;
-                    found = true;
+                /*if (self.ListOfItems.length == 0) {
+                 self.ListOfItems.push(self.goods[i]);
+                 // self.ListOfItems[self.ListOfItems.length - 1].count = 1;
+                 self.ListOfItems[self.ListOfItems.length - 1].count = 1;
+                 self.goods[i].number--;
+                 found = true;
 
-                }
+                 }*/
 
-                else {
+                // else {
 
-                    for (var f = 0; f < self.ListOfItems.length; f++) {
 
-                        if (self.ListOfItems[f].name == self.goods[i].name) {
-                            found = true;
-                            self.ListOfItems[f].count++;
-                            self.goods[i].number--;
-                            
-                        }
+                for (var f = 0; f < self.ListOfItems.length; f++) {
+
+                    if (self.ListOfItems[f].name == self.goods[i].name) {
+                        found = true;
+                        self.ListOfItems[f].count++;
+                        self.goods[i].number--;
+
 
                     }
+
                 }
+                //}
 
                 if (!found) {
                     self.ListOfItems.push(self.goods[i]);
                     self.ListOfItems[self.ListOfItems.length - 1].count = 1;
+
                     found = true;
                     self.goods[i].number--;
 
 
                 }
 
-                for (var j = 0; j < self.ListOfItems.length; j++) {
-                    if (self.ListOfItems[j].count > 1) {
 
-                            self.removeNode();
+                // self.removeNode(param);
 
 
-                    }
-                }
                 self.createBasket();
 
 
@@ -81,22 +81,30 @@ var magazyka = {
 
     },
 
-    removeNode: function () {
+    removeNode: function (param) {
 
         var table = document.getElementById("basket");
-        var $tr = document.getElementById("ba");
+        var $tr = document.getElementById(param);
         table.removeChild($tr);
 
 
     },
 
     DelBasket: function (param) {
-        for (var f = 0; f < this.ListOfItems.length; f++) {
-            if (param == f) {
-                this.ListOfItems.splice(f, 1);
-                this.removeNode();
-            }
-        }
+        /*for (var f = 0; f < this.ListOfItems.length; f++) {
+         if (param == f) {
+         this.ListOfItems.splice(f, 1);
+         var table = document.getElementById("basket");
+         var $tr = document.getElementById(param);
+         table.removeChild($tr);
+         }
+         }*/
+        this.ListOfItems.splice(param, 1);
+       // var table = document.getElementById("basket");
+       // var $tr = document.getElementById(param);
+        //table.removeChild($tr);
+        // this.createBasket();
+
 
     },
 
@@ -135,7 +143,9 @@ var magazyka = {
      },*/
 
     createBasket: function () {
+
         var self = this;
+
         var table = document.getElementById("basket");
         var $tr,
             $documentFragment = document.createDocumentFragment(),
@@ -148,8 +158,10 @@ var magazyka = {
             $button;
 
         for (var i = 0; i < this.ListOfItems.length; i++) {
+
+
             $tr = document.createElement('tr');
-            $tr.id = 'ba';
+           // $tr.id = i;
 
 
             $tdName = document.createElement('td');
@@ -162,6 +174,7 @@ var magazyka = {
             $tdName.className = "td";
             $tdPrice.className = "td";
             $tdcount.className = "td";
+            $tdcount.id = i;
             $tdButton.className = "centre";
 
             $tdName.innerHTML = this.ListOfItems[i].name;
@@ -204,10 +217,12 @@ var magazyka = {
             $tdButton.appendChild($buttonDel);
             $tdButton.appendChild($button);
 
+
             $tr.appendChild($tdName);
             $tr.appendChild($tdPrice);
             $tr.appendChild($tdcount);
             $tr.appendChild($tdButton);
+
 
             $documentFragment.appendChild($tr);
 
@@ -228,6 +243,7 @@ var magazyka = {
 
         for (var i = 0; i < this.goods.length; i++) {
             $tr = document.createElement('tr');
+            $tr.id = i;
 
             $tdName = document.createElement('td');
             $tdPrice = document.createElement('td');
@@ -251,10 +267,12 @@ var magazyka = {
             ourNewAttribute.nodeValue = i;
             self.$button.attributes.setNamedItem(ourNewAttribute);
 
-           self.$button.addEventListener('click', function () {
+
+            self.$button.addEventListener('click', function () {
                 console.log('Нажали купить товар под индексов', this.getAttribute('goods-index'));
                 // console.log('Вы кликнули по товару с именем: ' + event.target.innerHTML + " и ценой: " + event.target.getAttribute('price'));
                 self.addGoods(this.getAttribute('goods-index'));
+
             }, false)
 
 
@@ -263,6 +281,7 @@ var magazyka = {
             $tr.appendChild($tdName);
             $tr.appendChild($tdPrice);
             $tr.appendChild($tdButton);
+
 
             $documentFragment.appendChild($tr);
 
@@ -283,7 +302,7 @@ var magazyka = {
          self.buy.addEventListener('click', function () {
          self.addGoods();
          }, false);
-*/
+         */
 
     }
 }
