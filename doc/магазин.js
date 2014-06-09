@@ -1,8 +1,6 @@
 var magazyka = {
 
-    $button: null,
 
-    buy: null,
 
     ListOfItems: [
 
@@ -13,21 +11,18 @@ var magazyka = {
             name: 'Iphone',
             price: 9000,
             number: 5
-
         },
         {
             name: 'Чехол',
             price: 900,
             number: 37
-
         }
     ],
 
-
     addGoods: function (param) {
         var found = false,
-
             self = this;
+
         for (var i = 0; i < self.goods.length; i++) {
             if (param == i && self.goods[i].number > 0) {
                 /*if (self.ListOfItems.length == 0) {
@@ -81,66 +76,73 @@ var magazyka = {
 
     },
 
-    removeNode: function (param) {
+    inBasket: function () {
+        // var $documentFragment = document.createDocumentFragment();
+        var table,
+            caption,
+            trOne,
+            tdOne,
+            trTwo,
+            tdTwo;
 
-        var table = document.getElementById("basket");
-        var $tr = document.getElementById(param);
-        table.removeChild($tr);
+
+        table = document.createElement('table');
+        table.className = "q2";
+        caption = document.createElement('caption');
+        caption.innerHTML = "Корзина";
+
+        trOne = document.createElement('tr');
+        tdOne = document.createElement('td');
+        trOne.className = "w4";
+        tdOne.style = "text-align: center";
+        tdOne.innerHTML = "Товаров в корзин";
+
+        trTwo = document.createElement('tr');
+        trTwo.className = "w5";
+
+        tdTwo = document.createElement('td');
+        tdTwo.style = "text-align: center";
+        //var r = this.ListOfItems.length;
+        tdTwo.innerHTML = this.ListOfItems.length;
+
+        trOne.appendChild(tdOne);
+
+        trTwo.appendChild(tdTwo);
+
+        table.appendChild(caption);
+        table.appendChild(trOne);
+        table.appendChild(trTwo);
+
+       // var a = document.getElementsByTagName("body");
+        document.getElementsByTagName("body").appendChild(table);
 
 
     },
 
     DelBasket: function (param) {
-        /*for (var f = 0; f < this.ListOfItems.length; f++) {
-         if (param == f) {
-         this.ListOfItems.splice(f, 1);
-         var table = document.getElementById("basket");
-         var $tr = document.getElementById(param);
-         table.removeChild($tr);
+        /* for (var i = 0; i < this.goods.length; i++) {
+         for (var f = 0; f < this.ListOfItems.length; f++) {
+         if (param == f && param == i) {
+         this.goods[i].number += this.ListOfItems[f].count;
+         }
          }
          }*/
+        this.goods[param].number += this.ListOfItems[param].count;
         this.ListOfItems.splice(param, 1);
-       // var table = document.getElementById("basket");
-       // var $tr = document.getElementById(param);
-        //table.removeChild($tr);
-        // this.createBasket();
-
-
+        this.createBasket();
     },
 
 
     ChangeBasket: function (param) {
-
-        for (var f = 0; f < this.ListOfItems.length; f++) {
-
+        if (this.ListOfItems[param].count > 1) {
+            this.goods[param].number++;
+            this.ListOfItems[param].count--;
+            this.createBasket();
+        } else {
+            this.DelBasket(param);
         }
-
     },
-    /*
 
-     for (var f = 0; f < this.ListOfItems.length; f++) {
-     if (param == f && this.ListOfItems[f].count > 0) {
-     this.ListOfItems[f].count--;
-     //this.removeNode();
-     //this.removeNode();
-     //this.createBasket();
-
-     }
-     if (param == f && this.ListOfItems[f].count == 0) {
-
-     this.ListOfItems.splice(f, 1);
-     this.removeNode();
-     }
-     }
-     if (this.ListOfItems.length == 1) {
-     this.removeNode();
-     } else {
-     this.removeNode();
-     this.removeNode();
-     }
-
-     this.createBasket();
-     },*/
 
     createBasket: function () {
 
@@ -157,11 +159,19 @@ var magazyka = {
 
             $button;
 
+        //document.getElementById("basket").getElementsByTagName('tbody')[0].innerText = '';
+        removeChilds(document.getElementById("basket").getElementsByTagName('tbody')[0]);
+
+        function removeChilds(node) {
+            var last;
+            while (last = node.lastChild) node.removeChild(last);
+        }
+
         for (var i = 0; i < this.ListOfItems.length; i++) {
 
 
             $tr = document.createElement('tr');
-           // $tr.id = i;
+            // $tr.id = i;
 
 
             $tdName = document.createElement('td');
@@ -227,8 +237,8 @@ var magazyka = {
             $documentFragment.appendChild($tr);
 
         }
-
-        table.appendChild($documentFragment);
+        self.inBasket();
+        document.getElementById("basket").getElementsByTagName('tbody')[0].appendChild($documentFragment);
     },
 
     createGoods: function () {
@@ -273,7 +283,7 @@ var magazyka = {
                 // console.log('Вы кликнули по товару с именем: ' + event.target.innerHTML + " и ценой: " + event.target.getAttribute('price'));
                 self.addGoods(this.getAttribute('goods-index'));
 
-            }, false)
+            }, false);
 
 
             $tdButton.appendChild(self.$button);
