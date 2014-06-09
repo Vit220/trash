@@ -85,9 +85,13 @@ var magazyka = {
             trTwo,
             tdTwo;
 
+        document.getElementById("fff").innerText = '';
 
         table = document.createElement('table');
         table.className = "q2";
+        table.id = "fff";
+
+
         caption = document.createElement('caption');
         caption.innerHTML = "Корзина";
 
@@ -95,7 +99,7 @@ var magazyka = {
         tdOne = document.createElement('td');
         trOne.className = "w4";
         tdOne.style = "text-align: center";
-        tdOne.innerHTML = "Товаров в корзин";
+        tdOne.innerHTML = "Товаров в корзине";
 
         trTwo = document.createElement('tr');
         trTwo.className = "w5";
@@ -103,7 +107,13 @@ var magazyka = {
         tdTwo = document.createElement('td');
         tdTwo.style = "text-align: center";
         //var r = this.ListOfItems.length;
-        tdTwo.innerHTML = this.ListOfItems.length;
+        for (var f = 0; f < this.ListOfItems.length; f++){
+            var a;
+            a = this.ListOfItems[f].count;
+            console.log(a);
+        }
+
+        tdTwo.innerHTML = a;
 
         trOne.appendChild(tdOne);
 
@@ -114,7 +124,7 @@ var magazyka = {
         table.appendChild(trTwo);
 
        // var a = document.getElementsByTagName("body");
-        document.getElementsByTagName("body").appendChild(table);
+        document.getElementById("body").appendChild(table);
 
 
     },
