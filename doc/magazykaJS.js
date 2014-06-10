@@ -88,7 +88,9 @@ var magazyka = {
          //   var bb = document.getElementsByTagName("tr");
        // aa.removeChild(bb);
 
-       document.getElementById("fff").innerHTML = '';
+        if(document.getElementById("fff")){
+            document.getElementById("fff").innerHTML = '';
+        }
 
         table = document.createElement('table');
         table.className = "q2";
