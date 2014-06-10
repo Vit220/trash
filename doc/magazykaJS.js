@@ -84,8 +84,11 @@ var magazyka = {
             tdOne,
             trTwo,
             tdTwo;
+          //  var aa = document.getElementById("fff");
+         //   var bb = document.getElementsByTagName("tr");
+       // aa.removeChild(bb);
 
-        //document.getElementById("fff").innerHTML = '';
+       document.getElementById("fff").innerHTML = '';
 
         table = document.createElement('table');
         table.className = "q2";
@@ -103,15 +106,15 @@ var magazyka = {
 
         trTwo = document.createElement('tr');
         trTwo.className = "w5";
-        trTwo.id = "fff";
+        //trTwo.id = "fff";
 
         tdTwo = document.createElement('td');
         tdTwo.style = "text-align: center";
         //var r = this.ListOfItems.length;
         for (var f = 0; f < this.ListOfItems.length; f++){
             var a = 0;
-           var b = a + this.ListOfItems[f].count;
-            console.log(b);
+            a += this.ListOfItems[f].count;
+            console.log(a);
         }
 
         tdTwo.innerHTML = a;
