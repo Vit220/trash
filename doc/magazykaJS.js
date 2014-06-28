@@ -185,19 +185,19 @@ var magazyka = {
          this.goods[param].number += this.ListOfItems[param].count;
          }*/
 
-         for (var i = 0; i < this.goods.length; i++) {
-         for (var f = 0; f < this.ListOfItems.length; f++) {
-         if (this.goods[i].name ==  param && this.ListOfItems[f].name ==  param ) {
-         this.goods[i].number += this.ListOfItems[f].count;
-         this.ListOfItems.splice(f, 1);
-         this.createBasket();
-         }
-         }
-         }
+        for (var i = 0; i < this.goods.length; i++) {
+            for (var f = 0; f < this.ListOfItems.length; f++) {
+                if (this.goods[i].name == param && this.ListOfItems[f].name == param) {
+                    this.goods[i].number += this.ListOfItems[f].count;
+                    this.ListOfItems.splice(f, 1);
+                    this.createBasket();
+                }
+            }
+        }
 
-           /*     this.goods[param].number += this.ListOfItems[param].count;
-        this.ListOfItems.splice(param, 1);
-        this.createBasket();*/
+        /*     this.goods[param].number += this.ListOfItems[param].count;
+         this.ListOfItems.splice(param, 1);
+         this.createBasket();*/
 
     },
 
@@ -224,6 +224,8 @@ var magazyka = {
             document.getElementById("basketTT").style.display = 'none';
             document.getElementById("order").style.display = 'none';
             document.getElementById("count").style.display = 'none';
+          // document.getElementById('count-field').innerHTML = "";
+
         }
 
         var table = document.createElement('table');
@@ -320,7 +322,7 @@ var magazyka = {
             $tdPrice.className = "td";
             $tdcount.className = "td";
 
-                   // $tdcount.id = this.ListOfItems[f].name;
+            // $tdcount.id = this.ListOfItems[f].name;
 
             $tdButton.className = "centre";
 
@@ -383,7 +385,7 @@ var magazyka = {
 
         }
         self.inBasket();
-         document.getElementById("basketTT").appendChild($documentFragment);
+        document.getElementById("basketTT").appendChild($documentFragment);
         document.getElementById("basketTT").style.display = 'block';
         //document.body.appendChild($documentFragment);
     },
@@ -465,15 +467,58 @@ var magazyka = {
 
     },
 
-    registration: function(){
-
+    registration: function () {
+        var self = this;
 
         var buttonEE = document.getElementById("reg-field");
         buttonEE.addEventListener('click', function () {
-            document.getElementById('name-field').value;
 
-            console.log(3)
+            var a = document.getElementById('name-field').value;
+            var b = document.getElementById('lastName-field').value;
+            var c = document.getElementById('address-field').value;
+
+            count(a, b, c);
+            document.getElementById('k').innerText = "Итого " + self.countPrice() + "грн";
             document.getElementById("count").style.display = 'block';
         }, false);
+        function count(a, b, c) {
+            if (document.getElementById("co")) {
+
+                document.getElementById("count-field").removeChild(document.getElementById("co"));
+            }
+
+            document.getElementById('a').innerHTML = b;
+            document.getElementById('b').innerHTML = a;
+            document.getElementById('c').innerHTML = c;
+            var documentFragment = document.createDocumentFragment();
+            var tt = document.createElement('tbody');
+            tt.id = "co";
+            document.getElementById("count-field");
+
+            for (var i = 0; i < self.ListOfItems.length; i++) {
+
+                var tr = document.createElement('tr');
+                var tdName = document.createElement('td');
+                var tdPrice = document.createElement('td');
+                var tdButton = document.createElement('td');
+
+
+                tdName.innerHTML = self.ListOfItems[i].name;
+                tdButton.innerHTML = "количество - " + self.ListOfItems[i].count;
+                tdPrice.innerHTML = " цена - " + self.ListOfItems[i].price + "грн";
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdButton);
+                tr.appendChild(tdPrice);
+                documentFragment.appendChild(tr);
+
+
+            }
+            var table = document.getElementById("count-field");
+            tt.appendChild(documentFragment);
+            table.appendChild(tt);
+
+
+        }
     }
 }
