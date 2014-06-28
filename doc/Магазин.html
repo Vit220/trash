@@ -15,6 +15,9 @@
     </tr>
 
 </table>
+<div id="inBasketTT" style="display: none">
+
+</div>
 <!-- <table class="q2">
     <caption>Корзина</caption>
     <tr class="w4">
@@ -37,7 +40,12 @@
     </thead>
     <tbody></tbody>
 </table> -->
-<table class="q4">
+<div id="basketTT" style="display: none">
+
+</div>
+
+
+<table class="q4" style="display: none" id="order">
     <caption><b>Форма оформления заказов</b></caption>
     <form action="/echo" method="post">
         <tr>
@@ -68,12 +76,12 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: right"><input type=submit value=Подтвердить id=reg-field></td>
+            <td style="text-align: right"><input type=button value=Подтвердить id=reg-field></td>
         </tr>
     </form>
 
 </table>
-<table class="q5">
+<table class="q5" style="display: none">
     <tr>
         <th style="padding-bottom: 1%"><h1>Счет</h1></th>
     </tr>
@@ -95,14 +103,14 @@
 
     .q2 {
         margin-left: 75%;
-        margin-top: -25%;
+        margin-top: -12%;
         border-collapse: collapse;
         width: 13%;
         height: 130px;
     }
 
     .q3 {
-        margin-top: -12%;
+        margin-top: 5%;
         border-collapse: collapse;
         width: 70%;
         height: 20px;
@@ -110,7 +118,7 @@
 
     .q4 {
 
-        margin-top: 15%;
+        margin-top: 25%;
         border: 1px solid black;
         border-collapse: collapse;
         width: 20%;
