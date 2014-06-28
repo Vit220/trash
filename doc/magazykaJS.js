@@ -120,7 +120,7 @@ var magazyka = {
         //trTwo.id = "fff";
 
         tdTwo = document.createElement('td');
-        tdTwo.style = "text-align: center";
+
         //var r = this.ListOfItems.length;
         var a = 0;
         for (var f = 0; f < this.ListOfItems.length; f++) {
@@ -154,6 +154,7 @@ var magazyka = {
         }
 
         tdTwo.innerHTML = a;
+        table.style = "text-align: center";
 
         trOne.appendChild(tdOne);
 
@@ -221,6 +222,8 @@ var magazyka = {
             document.getElementById("basketTT").removeChild(document.getElementById("basket"));
             document.getElementById("basketTT").removeChild(document.getElementById("tableTotal"));
             document.getElementById("basketTT").style.display = 'none';
+            document.getElementById("order").style.display = 'none';
+            document.getElementById("count").style.display = 'none';
         }
 
         var table = document.createElement('table');
@@ -285,8 +288,9 @@ var magazyka = {
 
         $buttonReg.addEventListener('click', function () {
             console.log("fdgd");
-            var order = document.getElementById("order");
-            order.style.display = 'block';
+            document.getElementById("order").style.display = 'block';
+            self.registration();
+
         }, false)
 
         var trReg = document.createElement('td');
@@ -462,17 +466,14 @@ var magazyka = {
     },
 
     registration: function(){
-        var name = document.getElementById("name-field");
-        var lastName = document.getElementById("lastName-field");
-        var address = document.getElementById("address-field");
 
-        //var tab = document.getElementById("tab");
-        var order = document.getElementById("order");
 
         var buttonEE = document.getElementById("reg-field");
         buttonEE.addEventListener('click', function () {
-            alert(document.getElementById('name-field').value)
-            order.style.display = 'block';
+            document.getElementById('name-field').value;
+
+            console.log(3)
+            document.getElementById("count").style.display = 'block';
         }, false);
     }
 }
