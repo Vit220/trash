@@ -16,6 +16,11 @@ var magazyka = {
             name: 'Чехол',
             price: 900,
             number: 37
+        },
+        {
+            name: '111',
+            price: 300,
+            number: 37
         }
     ],
 
@@ -40,7 +45,6 @@ var magazyka = {
                 for (var f = 0; f < self.ListOfItems.length; f++) {
 
                     if (self.ListOfItems[f].name == self.goods[i].name) {
-
 
 
                         found = true;
@@ -68,7 +72,7 @@ var magazyka = {
 
 
                 self.createBasket();
-
+                break;
 
             }
             if (param == i && self.goods[i].number <= 0) {
@@ -123,6 +127,30 @@ var magazyka = {
             a += this.ListOfItems[f].count;
             console.log(a);
         }
+        if (a % 100 >= 11 && a % 100 <= 14) {
+            a += " товаров";
+        } else {
+            switch (a % 10) {
+                case 1:
+                {
+                    a += " товар";
+                    break;
+                }
+
+                case 2:
+                case 3:
+                case 4:
+                {
+                    a += " товара";
+                    break;
+                }
+
+                default :
+                {
+                    a += " товаров";
+                }
+            }
+        }
 
         tdTwo.innerHTML = a;
 
@@ -140,25 +168,34 @@ var magazyka = {
 
     },
 
+    countPrice: function () {
+        var sum = 0;
+        for (var i = 0; i < this.ListOfItems.length; i++) {
+            sum += this.ListOfItems[i].count * this.ListOfItems[i].price;
+        }
+        return sum;
+    },
+
     DelBasket: function (param) {
 
-       /* if (this.ListOfItems.name == this.goods.name) {
+        /* if (this.ListOfItems.name == this.goods.name) {
 
-            this.goods[param].number += this.ListOfItems[param].count;
-        }*/
+         this.goods[param].number += this.ListOfItems[param].count;
+         }*/
 
-        /* for (var i = 0; i < this.goods.length; i++) {
+         for (var i = 0; i < this.goods.length; i++) {
          for (var f = 0; f < this.ListOfItems.length; f++) {
-         if (param == f && param == i) {
+         if (this.goods[i].name ==  param && this.ListOfItems[f].name ==  param ) {
          this.goods[i].number += this.ListOfItems[f].count;
-         this.ListOfItems.splice(param, 1);
+         this.ListOfItems.splice(f, 1);
          this.createBasket();
          }
          }
-         }*/
-        this.goods[param].number += this.ListOfItems[param].count;
-            this.ListOfItems.splice(param, 1);
-            this.createBasket();
+         }
+
+           /*     this.goods[param].number += this.ListOfItems[param].count;
+        this.ListOfItems.splice(param, 1);
+        this.createBasket();*/
 
     },
 
@@ -181,6 +218,7 @@ var magazyka = {
         if (document.getElementById("basket")) {
 
             document.body.removeChild(document.getElementById("basket"));
+            document.body.removeChild(document.getElementById("tableTotal"));
         }
 
         var table = document.createElement('table');
@@ -208,15 +246,13 @@ var magazyka = {
         thDoing.className = "td";
         thDoing.innerHTML = "Действия";
 
-       // var tbody = document.createElement('tbody');
-
+        var tbody = document.createElement('tbody');
 
 
         trFirst.appendChild(thName);
         trFirst.appendChild(thPrice);
         trFirst.appendChild(thSum);
         trFirst.appendChild(thDoing);
-
 
 
         var caption = document.createElement('caption');
@@ -232,8 +268,31 @@ var magazyka = {
 
             $button;
 
-        //document.getElementById("basket").getElementsByTagName('tbody')[0].innerText = '';
+        var tableTotal = document.createElement('table');
+        tableTotal.className = "without-border";
+        tableTotal.id = "tableTotal";
 
+        var trTotal = document.createElement('tr');
+
+        var tdTotal = document.createElement('td');
+        tdTotal.innerHTML = "Вего: " + self.countPrice() + " грн";
+
+        var $buttonReg = document.createElement('input');
+        $buttonReg.type = 'button';
+        $buttonReg.value = 'Перейти к оформлению';
+
+        $buttonReg.addEventListener('click', function () {
+            console.log("fdgd");
+            self.registration();
+        }, false)
+
+        var trReg = document.createElement('td');
+        trReg.appendChild($buttonReg);
+
+
+        trTotal.appendChild(tdTotal);
+        trTotal.appendChild(trReg);
+        tableTotal.appendChild(trTotal);
 
 
         for (var i = 0; i < this.ListOfItems.length; i++) {
@@ -253,7 +312,9 @@ var magazyka = {
             $tdName.className = "td";
             $tdPrice.className = "td";
             $tdcount.className = "td";
-            $tdcount.id = i;
+
+                   // $tdcount.id = this.ListOfItems[f].name;
+
             $tdButton.className = "centre";
 
             $tdName.innerHTML = this.ListOfItems[i].name;
@@ -277,7 +338,7 @@ var magazyka = {
             $button.attributes.setNamedItem(ourNewAttribute);
 
             var DELAttribute = document.createAttribute("list-index");
-            DELAttribute.nodeValue = i;
+            DELAttribute.nodeValue = this.ListOfItems[i].name;
             $buttonDel.attributes.setNamedItem(DELAttribute);
 
             $button.addEventListener('click', function () {
@@ -303,14 +364,19 @@ var magazyka = {
             $tr.appendChild($tdButton);
 
             table.appendChild(caption);
+            table.appendChild(caption);
             table.appendChild(trFirst);
-            table.appendChild($tr);
+
+            tbody.appendChild($tr);
+            table.appendChild(tbody);
+
 
             $documentFragment.appendChild(table);
+            $documentFragment.appendChild(tableTotal);
 
         }
         self.inBasket();
-       // document.getElementById("basket").getElementsByTagName('tbody')[0].appendChild($documentFragment);
+        // document.getElementById("basket").getElementsByTagName('tbody')[0].appendChild($documentFragment);
         document.body.appendChild($documentFragment);
     },
 
@@ -387,5 +453,18 @@ var magazyka = {
          }, false);
          */
 
+    },
+
+    registration: function(){
+        var name = document.getElementById("name-field");
+        var lastName = document.getElementById("lastName-field");
+        var address = document.getElementById("address-field");
+
+        //var tab = document.getElementById("tab");
+
+        var button = document.getElementById("reg-field");
+        button.addEventListener('click', function () {
+            console.log(document.getElementById('name-field').value)
+        }, false);
     }
 }
