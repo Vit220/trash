@@ -96,7 +96,8 @@ var magazyka = {
         // aa.removeChild(bb);
         if (document.getElementById("fff")) {
 
-            document.body.removeChild(document.getElementById("fff"));
+            document.getElementById("inBasketTT").removeChild(document.getElementById("fff"));
+            document.getElementById("inBasketTT").style.display = 'none'
         }
 
 
@@ -163,8 +164,8 @@ var magazyka = {
         table.appendChild(trTwo);
 
 
-        document.getElementById("bodyFirst").appendChild(table);
-
+        document.getElementById("inBasketTT").appendChild(table);
+        document.getElementById("inBasketTT").style.display = 'block'
 
     },
 
@@ -217,8 +218,9 @@ var magazyka = {
 
         if (document.getElementById("basket")) {
 
-            document.body.removeChild(document.getElementById("basket"));
-            document.body.removeChild(document.getElementById("tableTotal"));
+            document.getElementById("basketTT").removeChild(document.getElementById("basket"));
+            document.getElementById("basketTT").removeChild(document.getElementById("tableTotal"));
+            document.getElementById("basketTT").style.display = 'none';
         }
 
         var table = document.createElement('table');
@@ -283,7 +285,8 @@ var magazyka = {
 
         $buttonReg.addEventListener('click', function () {
             console.log("fdgd");
-            self.registration();
+            var order = document.getElementById("order");
+            order.style.display = 'block';
         }, false)
 
         var trReg = document.createElement('td');
@@ -376,8 +379,9 @@ var magazyka = {
 
         }
         self.inBasket();
-        // document.getElementById("basket").getElementsByTagName('tbody')[0].appendChild($documentFragment);
-        document.body.appendChild($documentFragment);
+         document.getElementById("basketTT").appendChild($documentFragment);
+        document.getElementById("basketTT").style.display = 'block';
+        //document.body.appendChild($documentFragment);
     },
 
     createGoods: function () {
@@ -440,6 +444,8 @@ var magazyka = {
         var table = document.getElementById("goods");
         table.appendChild($documentFragment);
 
+        self.inBasket();
+
         /*table.addEventListener('click', function(event) {
          if (event.target.tagName && event.target.tagName == 'input' && event.target.className == 'buy-btn') {
          console.log("Индекс твоара", event.target.getAttribute('goods-index'))
@@ -461,10 +467,12 @@ var magazyka = {
         var address = document.getElementById("address-field");
 
         //var tab = document.getElementById("tab");
+        var order = document.getElementById("order");
 
-        var button = document.getElementById("reg-field");
-        button.addEventListener('click', function () {
-            console.log(document.getElementById('name-field').value)
+        var buttonEE = document.getElementById("reg-field");
+        buttonEE.addEventListener('click', function () {
+            alert(document.getElementById('name-field').value)
+            order.style.display = 'block';
         }, false);
     }
 }
