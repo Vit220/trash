@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function Collaborator(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+    Collaborator.prototype.go = function () {
+        console.log(this.name, this.age, this.sex);
+    };
+    Collaborator.prototype.work = function () {
+        console.log("Пришел на работу");
+    };
+    Collaborator.prototype.notWork = function () {
+        console.log("Закончил работать");
+    };
+    Collaborator.prototype.vacation = function () {
+        console.log("Ушел в отпуск");
+    };
+    Collaborator.prototype.del = function () {
+        console.log("Уволился");
+    };
+    Collaborator.prototype.salary = function () {
+        console.log("Получка");
+    };
+
+
+    //var worker1 = new Collaborator("Вадим", "27", "male");
+    //worker1.go();
+
+
+    function inheritBest(Child, Parent) {
+        var c = Child.prototype.constructor;
+        var F = function () {
+        };
+        F.prototype = Parent.prototype;
+        Child.prototype = new F();
+        Child.prototype.constructor = c;
+    }
+
+    function Boss() {
+        Collaborator.apply(this, arguments);
+        this.type = 'Boss';
+    }
+
+    inheritBest(Boss, Collaborator);
+
+    Boss.prototype.dismiss = function () {
+        console.log(this.name + ' может уволить');
+        console.log(this.name + ' взять на работу');
+    };
+
+
+    //director.go();
+    // director.dismiss();
+
+    function DeputyDirector() {
+        Collaborator.apply(this, arguments);
+        this.type = 'Заместитель директора';
+    }
+
+    //inheritBest(DeputyDirector, Collaborator);
+    inheritBest(DeputyDirector, Boss);
+
+
+    // var deputyDirector = new Boss("Дима", "26", "male");
+    // deputyDirector.go();
+    //deputyDirector.dismiss();
+    //deputyDirector.vacation();
+
+
+    function Security() {
+        Collaborator.apply(this, arguments);
+        this.type = 'Охрана';
+    }
+    inheritBest(Security, Collaborator);
+    Security.prototype.security = function () {
+        console.log("Охранять");
+    };
+
+    /// var security = new Security("Jа", "26", "male");
+    // security.security();
+    //  security.go();
+
+    function Trainee() {
+        Collaborator.apply(this, arguments);
+        this.type = 'Стажер';
+    }
+    inheritBest(Trainee, Collaborator);
+    Trainee.prototype.salary = function () {
+        console.log("Стажер не получает зп");
+    }
+
+
+    //security.salary();
+    //trainee.salary();
+
+
+   /* function add() {
+        var del = prompt('должность');
+        if (del == "Стажер") {
+            var vasya = new Trainee("Вася", "26", "male");
+        } else {
+            alert("такой должности нет");
+        }
+
+        return vasya;
+
+    }*/
+
+
+
+
+    /* var listOfWorkers = [
+     director = {},
+     security = {},
+     trainee = {}
+     ];*/
+
+    var sec = new Security("1111", "22", "male");
+
+
+
+
+    function Company() {
+        this.trainee = [
+        ];
+        this.security = [
+        ];
+        this.director = [
+        ];
+
+        if(sec instanceof Security){
+            this.security.push(sec);
+        }
+
+
+
+    }
+Company();
+
+
+
+</script>
+
+
+</body>
+</html>
