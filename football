@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+    var Factory = (function () {
+
+        var factory = {
+            contsructors: {
+                player: function (name, age, number, game) {
+                    this.name = name;
+                    this.age = age;
+                    this.number = number;
+                    this.game = game;
+                    //Главный класс
+                }
+            },
+            getInstance: function (className, name, age, number, game) {
+                if (this.contsructors[className]) {
+                    ///var args = Array.prototype.slice.apply(arguments, [1]);
+                    return new this.contsructors[className](name, age, number, game);
+                } else {
+                    throw Error('Unknown class name ' + className);
+                }
+            }
+        };
+
+        //делаем какое то наследование или какие то операции
+
+
+        return factory;
+    })();
+
+    var vadim = Factory.getInstance('player', "vadim", 21, 9, "forward");
+    var ronaldo = Factory.getInstance('player', "Ronaldo", 60, 90, "forward");
+    var tort = Factory.getInstance('player', "Tort", 5, 20, "forward");
+    var zik = Factory.getInstance('player', "вратарь1", 1, 1, "goalkeeper");
+    var zik2 = Factory.getInstance('player', "вратарь2", 1, 1, "goalkeeper");
+    //console.log(ronaldo);
+
+
+    //var add = Team.data.push(ronaldo);
+
+    var Team = (function () {
+        //индекс текущего елемента для итерирования
+        var index = 0,
+                data = [],
+                length = data.length;
+
+
+        return {
+            //получить следующий элемент
+            next: function () {
+                var element;
+
+                //проверяем если текущий не последний в списке
+                if (!this.hasNext()) {
+                    return null;
+                }
+                element = data[index];
+                index = index + 1;
+                return element;
+            },
+            //метод для проверки не достигли ли мы конца в переборе
+            hasNext: function () {
+                return index < length;
+            },
+            //сбросить индекс текущего элемента на начало
+            rewind: function () {
+                index = 0;
+            },
+            //вернуть текущий элемент
+            current: function () {
+                return data[index];
+            },
+
+            add: function (name) { //добавление игрока в команду с проверкой -  макс 1 вратарь макс 11 человек
+                var a = false;
+                if (data.length == 0) {
+                    data.push(name)
+                } else {
+                    for (var g = 0; g < data.length; g++) {
+                        if (data[g].game == "goalkeeper") {
+                            a = true;
+                            break;
+                        }
+
+                    }
+
+                    if (!a && data.length < 11) {
+                        data.push(name);
+
+                    }
+                }
+                // console.log(data);
+            },
+            del: function (name) {
+                data.splice(name, 1)
+            },
+            name: function (name) {
+                console.log("Команда " + name);
+                console.log('Список игроков на поле:');
+                for (var i = 0; i < data.length; i++) {
+                    console.log(data[i].name + " под номером - " + data[i].number);
+                }
+            }
+
+
+
+        };
+    }());
+
+
+    Team.add(ronaldo);
+    Team.add(vadim);
+    Team.add(tort);
+    Team.add(zik);
+    Team.add(zik2); //второй вратарь для проверки на 1 вратаря в команде
+    Team.name("Металист");
+    // Team.delete(sdg);
+
+
+    function Match() {
+        if (typeof Match.instance === "object") {
+            return Match.instance;
+        }
+
+        this.starMatch = true;
+        this.stopMatch = false;
+
+
+        Match.instance = this;
+    }
+
+
+</script>
+</body>
+</html>
