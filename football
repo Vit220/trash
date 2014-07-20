@@ -7,135 +7,289 @@
 <script type="text/javascript">
 
 
-    var Factory = (function () {
+var Factory = (function () {
 
-        var factory = {
-            contsructors: {
-                player: function (name, age, number, game) {
-                    this.name = name;
-                    this.age = age;
-                    this.number = number;
-                    this.game = game;
-                    //Главный класс
-                }
-            },
-            getInstance: function (className, name, age, number, game) {
-                if (this.contsructors[className]) {
-                    ///var args = Array.prototype.slice.apply(arguments, [1]);
-                    return new this.contsructors[className](name, age, number, game);
-                } else {
-                    throw Error('Unknown class name ' + className);
-                }
+    var factory = {
+        contsructors: {
+            player: function (name, age, number, game) {
+                this.name = name;
+                this.age = age;
+                this.number = number;
+                this.game = game;
+                //Главный класс
             }
-        };
+        },
+        getInstance: function (className, name, age, number, game) {
+            if (this.contsructors[className]) {
+                ///var args = Array.prototype.slice.apply(arguments, [1]);
+                return new this.contsructors[className](name, age, number, game);
+            } else {
+                throw Error('Unknown class name ' + className);
+            }
+        }
+    };
 
-        //делаем какое то наследование или какие то операции
-
-
-        return factory;
-    })();
-
-    var vadim = Factory.getInstance('player', "vadim", 21, 9, "forward");
-    var ronaldo = Factory.getInstance('player', "Ronaldo", 60, 90, "forward");
-    var tort = Factory.getInstance('player', "Tort", 5, 20, "forward");
-    var zik = Factory.getInstance('player', "вратарь1", 1, 1, "goalkeeper");
-    var zik2 = Factory.getInstance('player', "вратарь2", 1, 1, "goalkeeper");
-    //console.log(ronaldo);
+    //делаем какое то наследование или какие то операции
 
 
-    //var add = Team.data.push(ronaldo);
+    return factory;
+})();
 
-    var Team = (function () {
-        //индекс текущего елемента для итерирования
-        var index = 0,
-                data = [],
-                length = data.length;
+var vadim = Factory.getInstance('player', "vadim", 21, 9, "forward");
+var ronaldo = Factory.getInstance('player', "Ronaldo", 60, 90, "forward");
+var tort = Factory.getInstance('player', "Tort", 5, 20, "forward");
+var zik = Factory.getInstance('player', "вратарь1", 1, 1, "goalkeeper");
+var zik2 = Factory.getInstance('player', "вратарь2", 1, 1, "goalkeeper");
+//console.log(ronaldo);
 
 
-        return {
-            //получить следующий элемент
-            next: function () {
-                var element;
+//var add = Team.data.push(ronaldo);
 
-                //проверяем если текущий не последний в списке
-                if (!this.hasNext()) {
-                    return null;
-                }
-                element = data[index];
-                index = index + 1;
-                return element;
-            },
-            //метод для проверки не достигли ли мы конца в переборе
-            hasNext: function () {
-                return index < length;
-            },
-            //сбросить индекс текущего элемента на начало
-            rewind: function () {
-                index = 0;
-            },
-            //вернуть текущий элемент
-            current: function () {
-                return data[index];
-            },
+var Team = (function () {
+    //индекс текущего елемента для итерирования
+    var index = 0,
+            data = [],
+            length = data.length;
 
-            add: function (name) { //добавление игрока в команду с проверкой -  макс 1 вратарь макс 11 человек
-                var a = false;
-                if (data.length == 0) {
-                    data.push(name)
-                } else {
-                    for (var g = 0; g < data.length; g++) {
-                        if (data[g].game == "goalkeeper") {
-                            a = true;
-                            break;
-                        }
 
+    return {
+        //получить следующий элемент
+        next: function () {
+            var element;
+
+            //проверяем если текущий не последний в списке
+            if (!this.hasNext()) {
+                return null;
+            }
+            element = data[index];
+            index = index + 1;
+            return element;
+        },
+        //метод для проверки не достигли ли мы конца в переборе
+        hasNext: function () {
+            return index < length;
+        },
+        //сбросить индекс текущего элемента на начало
+        rewind: function () {
+            index = 0;
+        },
+        //вернуть текущий элемент
+        current: function () {
+            return data[index];
+        },
+
+        add: function (name) { //добавление игрока в команду с проверкой -  макс 1 вратарь макс 11 человек
+            var a = false;
+            if (data.length == 0) {
+                data.push(name)
+            } else {
+                for (var g = 0; g < data.length; g++) {
+                    if (data[g].game == "goalkeeper") {
+                        a = true;
+                        break;
                     }
 
-                    if (!a && data.length < 11) {
-                        data.push(name);
-
-                    }
                 }
-                // console.log(data);
-            },
-            del: function (name) {
-                data.splice(name, 1)
-            },
-            name: function (name) {
-                console.log("Команда " + name);
-                console.log('Список игроков на поле:');
-                for (var i = 0; i < data.length; i++) {
-                    console.log(data[i].name + " под номером - " + data[i].number);
+
+                if (!a && data.length < 11) {
+                    data.push(name);
+
                 }
             }
+            // console.log(data);
+        },
+        delete: function (name) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].name == name.name) {
+                    console.log(data[i].name + " удален");
+                    data.splice([i], 1);
+                    sam1.del();
 
+                }
 
+            }
 
-        };
-    }());
+        },
+        name: function (name) {
+            console.log("Команда " + name);
+            console.log('Список игроков на поле:');
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].name + " под номером - " + data[i].number);
+            }
+        },
+        change: function (delName, addName) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].name == delName.name) {
+                    data.splice([i], 1);
+                }
+            }
+            Team.add(addName);
 
+            sam1.change();
+            console.log("Замена " + delName.name + " на " + addName.name);
 
-    Team.add(ronaldo);
-    Team.add(vadim);
-    Team.add(tort);
-    Team.add(zik);
-    Team.add(zik2); //второй вратарь для проверки на 1 вратаря в команде
-    Team.name("Металист");
-    // Team.delete(sdg);
-
-
-    function Match() {
-        if (typeof Match.instance === "object") {
-            return Match.instance;
         }
 
-        this.starMatch = true;
-        this.stopMatch = false;
 
 
-        Match.instance = this;
+    };
+}());
+
+
+function Math() {
+    //каждый екземпляр должен иметь свой список событий поэтому помещаем это свойство в конструктор
+    this.events = [];
+}
+
+
+Math.prototype = {
+    constructor: Math,
+    //метод добавления обработчика на событие. Аналогичен подписке на события в jquery
+    /**
+     *
+     * @param eventName Имя события
+     * @param callback функция обработчик на событие
+     * @param context Контекст для this в котором вызывать это событие
+     */
+    on: function (eventName, callback, context) {
+
+        //если подписчиков для такого события еще не было создаем массив для подписчиков
+        if (typeof this.events[eventName] === "undefined") {
+            this.events[eventName] = [];
+        }
+
+        //добавляем обработчик в массив для для данного события
+        this.events[eventName].push({
+            fn: callback,
+            context: context || this
+        });
+    },
+    //Удаление обработчиков для определенного события
+    off: function (eventName) {
+        if (this.events[eventName]) {
+            this.events[eventName] = [];
+        }
+    },
+    //Вызвать событие с таким именем
+    fireEvent: function (eventName) {
+        // Превращаем все аргументы переданные в функцию в массив и вырезаем имя события
+        var args = Array.prototype.slice.apply(arguments, [1]);
+
+        //Вызываем все обработчики для события с массивом аргументов
+        if (this.events[eventName]) {
+            for (var i = 0; i < this.events[eventName].length; i++) {
+                this.events[eventName][i].fn.apply(this.events[eventName][i].context, args);
+            }
+        }
     }
+};
 
+function Sam() {
+
+    this.goal = function () {
+        //Вызываем событие  которые будут переданы в в обработчики
+        this.fireEvent('goal');
+    };
+    this.del = function () {
+        this.fireEvent('del');
+    };
+    this.change = function () {
+        this.fireEvent('change');
+    };
+    Math.apply(this);
+}
+
+//Наследуем методы
+Sam.prototype = Math.prototype;
+
+var sam1 = new Sam();
+//Подписываемся на событие
+sam1.on('goal', function () {
+    console.log("Коментатор - Забит гол!!!");
+    //публикуем в канал nameChange чтобы вызывать обработчики
+    mediator.publish('nameChange', "зрители - Урааа!!!");
+});
+sam1.on('del', function (name) {
+    console.log("Коментатор - Игрок - удален");
+    //публикуем в канал nameChange чтобы вызывать обработчики
+    mediator.publish('nameChange', "пичаль");
+});
+sam1.on('change', function () {
+    console.log("Коментатор - замена");
+
+    //публикуем в канал nameChange чтобы вызывать обработчики
+    mediator.publish('nameChange', "вперед");
+});
+
+
+var mediator = (function () {
+    //приватный метод который будет доступен только через замыкание
+    var subscribe = function (channel, fn) {
+
+        //проверяем если уже подписчики на этот канал информации
+        if (!mediator.channels[channel]) {
+            mediator.channels[channel] = [];
+        }
+
+        //добавляем обработчик в массив обработчиков для событий этого канала
+        mediator.channels[channel].push({ context: this, callback: fn });
+
+        return this;
+    };
+    //
+    var publish = function (channel) {
+
+        //если при публикации события нету подписчиков на канала (обработчиков события) то ничего не делаем
+        if (!mediator.channels[channel]) {
+            return false;
+        }
+
+        //превращаем массив аргументов в обычный массив убирая из списка имя события
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        //перебираем все функции-подписчики и выполняем их передавая аргументы
+        for (var i = 0, l = mediator.channels[channel].length; i < l; i++) {
+            var subscription = mediator.channels[channel][i];
+            subscription.callback.apply(subscription.context, args);
+        }
+
+        return this;
+    };
+
+    //возращаем объект с публичными методами
+    return {
+        channels: {},
+        publish: publish,
+        subscribe: subscribe,
+        installTo: function (obj) {
+            obj.subscribe = subscribe;
+            obj.publish = publish;
+        }
+    };
+
+}());
+//подписываемся на канал с именем nameChange и ждем сообщений в нем
+mediator.subscribe('nameChange', function (arg) {
+
+    this.ivent = arg;
+    console.log(this.ivent);
+});
+
+
+//sam1.change();
+
+Team.add(ronaldo);
+Team.add(vadim);
+Team.add(tort);
+Team.add(zik);
+Team.delete(zik);
+//Team.add(zik2); //второй вратарь для проверки на 1 вратаря в команде
+
+Team.change(vadim, zik);
+
+
+Team.name("Металист");
+sam1.goal();
 
 </script>
 </body>
